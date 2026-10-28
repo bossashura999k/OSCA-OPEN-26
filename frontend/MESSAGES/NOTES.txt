@@ -42,9 +42,21 @@ POST /courses/ask — ask a question, get an answer
 
 body : {
 	question: "What is ….?"
-	material : [ "id","id] // reference multiple material
+	material : material_id,
+	course : course_id
 }
 
 
 
+
+ POST /courses (create),
+
+ POST /courses/:course_id/materials with { content: string } (text-paste only, no files/R2),
+
+ POST /courses/:id/ask with { question: string } (single course, not multi-material refs for now — simpler, faster). I’ll build to this exact shape tonight.
+
+
+
+
  
+

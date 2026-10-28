@@ -397,6 +397,28 @@
     }
 
     /* =========================================================
+       SECTIONS
+       ========================================================= */
+    section {
+      padding-block: var(--section-y);
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: var(--fs-h2);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: var(--space-3);
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 56ch;
+      margin-bottom: var(--space-6);
+    }
+
+    /* =========================================================
        TOOLBAR
        ========================================================= */
     .toolbar {
@@ -537,6 +559,25 @@
     }
 
     /* =========================================================
+       FEATURES  (reflows by available width, no breakpoints needed)
+       ========================================================= */
+    .feat {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+      gap: var(--space-5) var(--space-7);
+    }
+
+    .feat h3 {
+      font-size: var(--fs-h3);
+      margin-bottom: var(--space-1);
+    }
+
+    .feat p {
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    /* =========================================================
        DIALOG
        ========================================================= */
     dialog.modal {
@@ -623,26 +664,6 @@
       font-size: var(--fs-sm);
     }
 
-    .field small {
-      color: var(--muted);
-      font-size: var(--fs-xs);
-      line-height: 1.45;
-    }
-
-    .dlg-note {
-      font-size: var(--fs-xs);
-      color: var(--muted);
-      margin-bottom: var(--space-4);
-    }
-
-    .dlg-note code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: .1rem .35rem;
-    }
-
     .err {
       color: var(--bad);
       background: var(--bad-tint);
@@ -654,6 +675,58 @@
 
     .err[hidden] {
       display: none;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: var(--space-7) 0 calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .fcols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+    }
+
+    .fcols h3 {
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .fcols ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .fcols li {
+      margin-bottom: var(--space-1);
+    }
+
+    .fcols a {
+      display: inline-block;
+      padding-block: .2rem;
+      text-decoration: none;
+    }
+
+    .fbrand p {
+      max-width: 34ch;
+      margin-top: var(--space-2);
+    }
+
+    .fbottom {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      font-size: var(--fs-xs);
     }
 
     /* =========================================================
@@ -697,6 +770,11 @@
       nav ul a:hover {
         color: var(--ink);
       }
+
+      .fcols a:hover {
+        color: var(--green);
+        text-decoration: underline;
+      }
     }
 
     /* =========================================================
@@ -705,6 +783,20 @@
     @media (min-width: 600px) {
       .dlg-foot .btn {
         flex: 0 0 auto;
+      }
+
+      .fcols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fbrand {
+        grid-column: 1 / -1;
+      }
+
+      .fbottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
       }
     }
 
@@ -748,6 +840,15 @@
 
       .page-head {
         padding-block: var(--space-8) var(--space-6);
+      }
+
+      .fcols {
+        grid-template-columns: 1.6fr 1fr 1fr 1fr;
+        gap: var(--space-6);
+      }
+
+      .fbrand {
+        grid-column: auto;
       }
     }
 
@@ -842,24 +943,25 @@
 
     <section id="how">
       <div class="wrap">
-        <h2 class="fade-in">What a course holds</h2>
-        <p class="sub fade-in">Each course is a container for one subject&rsquo;s material and conversations.</p>
+        <h2 class="fade-in">How it works</h2>
+        <p class="sub fade-in">Add a course, upload the material, then ask questions. Each course keeps its own
+          documents and conversations, so answers always come from the right place.</p>
         <div class="feat">
           <div class="fade-in">
-            <h3>Its own uploads</h3>
+            <h3>Add a course</h3>
+            <p>Give it a name and a short description. Everything else is set up for you.</p>
+          </div>
+          <div class="fade-in">
+            <h3>Upload its material</h3>
             <p>Documents added to a course stay with it, so answers only ever come from the right material.</p>
           </div>
           <div class="fade-in">
-            <h3>A readable name and slug</h3>
-            <p>The name is what you see; the slug is the short, URL-safe version used in links.</p>
+            <h3>Ask anything about it</h3>
+            <p>Type a question in your own words and get a clear answer with the page it came from.</p>
           </div>
           <div class="fade-in">
-            <h3>A short description</h3>
-            <p>A line or two so you remember what the course covers when the list grows.</p>
-          </div>
-          <div class="fade-in">
-            <h3>A unique ID</h3>
-            <p>Generated automatically the moment you create the course — you never have to type it.</p>
+            <h3>Keep studying</h3>
+            <p>Follow up, ask for a simpler version, or turn the chapter into flashcards.</p>
           </div>
         </div>
       </div>
@@ -920,19 +1022,10 @@
         </div>
 
         <div class="field">
-          <label for="fSlug">Slug</label>
-          <input class="input" id="fSlug" name="slug" type="text" maxlength="60" autocomplete="off"
-            placeholder="organic-chemistry" spellcheck="false">
-          <small>Used in the course URL. Filled in from the name — edit it if you prefer.</small>
-        </div>
-
-        <div class="field">
           <label for="fDesc">Description</label>
           <textarea class="input" id="fDesc" name="description" rows="4" maxlength="400"
             placeholder="What does this course cover?"></textarea>
         </div>
-
-        <p class="dlg-note">ID: <code id="fId">crs_000000</code> — generated automatically.</p>
 
         <p class="err" id="formErr" role="alert" hidden></p>
       </div>
@@ -993,7 +1086,7 @@
       }
 
       /* =========================================================
-         HELPERS
+         HELPERS  (slug + id are internal only, never rendered)
          ========================================================= */
       function uid() {
         if (window.crypto && typeof window.crypto.randomUUID === 'function') {
@@ -1142,11 +1235,8 @@
       var dlg = document.getElementById('addDialog');
       var form = document.getElementById('addForm');
       var fName = document.getElementById('fName');
-      var fSlug = document.getElementById('fSlug');
       var fDesc = document.getElementById('fDesc');
-      var fId = document.getElementById('fId');
       var formErr = document.getElementById('formErr');
-      var slugTouched = false;
       var pendingId = '';
 
       function showError(message) {
@@ -1162,9 +1252,7 @@
       function openDialog() {
         form.reset();
         clearError();
-        slugTouched = false;
         pendingId = uid();
-        fId.textContent = pendingId;
 
         if (typeof dlg.showModal === 'function') {
           dlg.showModal();
@@ -1198,14 +1286,7 @@
         if (outside) closeDialog();
       });
 
-      /* slug follows the name until the user edits it by hand */
       fName.addEventListener('input', function () {
-        if (!slugTouched) fSlug.value = slugify(fName.value);
-        if (!formErr.hidden) clearError();
-      });
-
-      fSlug.addEventListener('input', function () {
-        slugTouched = fSlug.value.trim() !== '';
         if (!formErr.hidden) clearError();
       });
 
@@ -1214,7 +1295,6 @@
 
         var name = fName.value.trim().replace(/\s+/g, ' ');
         var description = fDesc.value.trim();
-        var slugInput = fSlug.value.trim();
 
         if (name.length < 2) {
           showError('Give the course a name of at least 2 characters.');
@@ -1222,10 +1302,10 @@
           return;
         }
 
-        var baseSlug = slugify(slugInput || name);
+        var baseSlug = slugify(name);
         if (!baseSlug) {
-          showError('The slug can only contain letters and numbers.');
-          fSlug.focus();
+          showError('The course name needs at least one letter or number.');
+          fName.focus();
           return;
         }
 
