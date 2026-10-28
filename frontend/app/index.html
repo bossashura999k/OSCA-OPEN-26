@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>document.documentElement.className = "js"</script>
+
+  <title>Courses | Ashura Study</title>
+  <meta name="description"
+    content="Browse your Ashura Study courses. Open a course to ask questions about its material, or add a new one.">
+  <meta name="robots" content="index, follow">
+
+  <meta name="theme-color" content="#0d5c3a" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1a13" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       DESIGN TOKENS
+       Every colour, size, space, radius and shadow lives here.
+       (CSS variables can't be used inside @media conditions,
+        so the two breakpoints are noted as comments instead:
+        --bp-nav: 860px   --bp-sm: 600px)
+       ========================================================= */
+    :root {
+      /* colour */
+      --ink: #10221a;
+      --muted: #52645a;
+      --paper: #fbfaf5;
+      --sheet: #ffffff;
+      --line: #dfe5df;
+      --green: #0d5c3a;
+      --green-d: #08402a;
+      --pencil: #f4c430;
+      --ok: #0d7a44;
+      --bad: #b3261e;
+
+      /* buttons + final banner (kept separate so dark mode keeps white-text contrast) */
+      --btn: #0d5c3a;
+      --btn-hover: #08402a;
+      --on-btn: #ffffff;
+      --final-bg: #0d5c3a;
+      --on-final: #ffffff;
+      --on-pencil: #10221a;
+      --pencil-hover: #ffd75a;
+
+      /* tinted states */
+      --ok-tint: rgba(13, 122, 68, .1);
+      --bad-tint: rgba(179, 38, 30, .08);
+      --header-bg: color-mix(in srgb, var(--paper) 94%, transparent);
+
+      /* typography (fluid) */
+      --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fs-base: clamp(1rem, .96rem + .2vw, 1.0625rem);
+      --fs-sm: .9rem;
+      --fs-xs: .85rem;
+      --fs-lead: clamp(1.05rem, 1rem + .3vw, 1.2rem);
+      --fs-h1: clamp(2rem, 1.25rem + 3.6vw, 3.6rem);
+      --fs-h2: clamp(1.5rem, 1.15rem + 1.8vw, 2.2rem);
+      --fs-h3: clamp(1.05rem, 1rem + .25vw, 1.15rem);
+      --fs-stat: clamp(1.3rem, 1.1rem + 1vw, 1.6rem);
+      --lh-body: 1.6;
+      --lh-tight: 1.1;
+
+      /* spacing scale */
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4.5rem;
+      --section-y: clamp(3rem, 2rem + 4vw, 4.5rem);
+      --gutter: clamp(1rem, .6rem + 2vw, 1.5rem);
+
+      /* layout */
+      --container: 1080px;
+      --header-h: 3.5rem;
+      --logo-size: 2.5rem;
+      --tap: 2.75rem;
+      /* minimum touch target (44px) */
+      --measure: 46ch;
+
+      /* shape */
+      --radius-sm: .5rem;
+      --radius-md: .75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.25rem;
+      --radius-pill: 999px;
+
+      /* depth + motion */
+      --shadow-card: 0 18px 40px -24px rgba(8, 64, 42, .45);
+      --shadow-header: 0 6px 20px -12px rgba(8, 64, 42, .5);
+      --shadow-menu: 0 14px 24px -14px rgba(8, 64, 42, .4);
+      --shadow-pop: 0 14px 40px -12px rgba(0, 0, 0, .35);
+      --ease: .15s ease;
+      --ease-slow: .5s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #eef3ee;
+        --muted: #a3b3a9;
+        --paper: #0d1a13;
+        --sheet: #14261c;
+        --line: #26402f;
+        --green: #2fa36b;
+        --green-d: #53c78e;
+        --btn: #1f8a58;
+        --btn-hover: #2fa36b;
+        --final-bg: #14573a;
+        --ok: #3fbf83;
+        --bad: #ff8a80;
+        --ok-tint: rgba(63, 191, 131, .14);
+        --bad-tint: rgba(255, 138, 128, .12);
+        --shadow-card: 0 18px 40px -24px rgba(0, 0, 0, .8);
+        --shadow-header: 0 6px 20px -12px rgba(0, 0, 0, .8);
+        --shadow-menu: 0 14px 24px -14px rgba(0, 0, 0, .8);
+        --shadow-pop: 0 14px 40px -12px rgba(0, 0, 0, .8);
+      }
+    }
+
+    /* roomier container on big screens */
+    @media (min-width: 1200px) {
+      :root {
+        --container: 1160px;
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    @media (min-width: 860px) {
+      :root {
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    /* =========================================================
+       BASE
+       ========================================================= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + var(--space-2));
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: var(--lh-body);
+      font-size: var(--fs-base);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 3px;
+    }
+
+    .btn,
+    .menu-btn,
+    .dlg-x {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
+    }
+
+    /* =========================================================
+       HEADER + NAV  (mobile first)
+       ========================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding-top: env(safe-area-inset-top, 0px);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      background: var(--header-bg);
+      transition: box-shadow var(--ease);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-header);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-h);
+      gap: var(--space-4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      min-height: var(--tap);
+    }
+
+    .logo .mark {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: var(--logo-size);
+      height: var(--logo-size);
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--on-btn);
+    }
+
+    .logo .mark svg {
+      width: 58%;
+      height: 58%;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--tap);
+      height: var(--tap);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-btn svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    .menu-btn path {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform var(--ease), opacity var(--ease);
+    }
+
+    .menu-btn[aria-expanded="true"] .l1 {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    .menu-btn[aria-expanded="true"] .l2 {
+      opacity: 0;
+    }
+
+    .menu-btn[aria-expanded="true"] .l3 {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    /* mobile dropdown panel: spans the full header width */
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      list-style: none;
+      padding: var(--space-2) max(var(--gutter), env(safe-area-inset-right, 0px)) var(--space-4) max(var(--gutter), env(safe-area-inset-left, 0px));
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-menu);
+      max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px));
+      overflow-y: auto;
+    }
+
+    nav ul.open {
+      display: flex;
+    }
+
+    nav ul a {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+      padding: var(--space-2) var(--space-1);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    nav ul a[aria-current="page"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav ul li:last-child {
+      margin-top: var(--space-2);
+    }
+
+    nav ul li:last-child .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap);
+      padding: .65rem 1.5rem;
+      background: var(--btn);
+      color: var(--on-btn);
+      font: 600 1rem/1.2 var(--font);
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid var(--btn);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--ease), border-color var(--ease);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    /* =========================================================
+       PAGE HEAD
+       ========================================================= */
+    .page-head {
+      padding-block: var(--space-6) var(--space-5);
+    }
+
+    h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-tight);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: var(--fs-lead);
+      margin-top: var(--space-4);
+      max-width: var(--measure);
+    }
+
+    /* =========================================================
+       TOOLBAR
+       ========================================================= */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+
+    .search {
+      flex: 1 1 16rem;
+      max-width: 26rem;
+    }
+
+    .count {
+      margin-left: auto;
+      font-size: var(--fs-sm);
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       FORM CONTROLS
+       ========================================================= */
+    .input {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: .7rem .85rem;
+      min-height: var(--tap);
+      transition: border-color var(--ease), background var(--ease);
+    }
+
+    .input::placeholder {
+      color: var(--muted);
+      opacity: .8;
+    }
+
+    .input:focus {
+      border-color: var(--green);
+    }
+
+    .input:focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 2px;
+    }
+
+    textarea.input {
+      min-height: 6.5rem;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       COURSE GRID
+       ========================================================= */
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+      gap: var(--space-4);
+    }
+
+    .course {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-card);
+      transition: border-color var(--ease), transform var(--ease);
+    }
+
+    .course:focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 3px;
+    }
+
+    .course.is-new {
+      animation: card-in .45s ease both;
+    }
+
+    @keyframes card-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+        border-color: var(--green);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .course-name {
+      font-size: var(--fs-h3);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.25;
+    }
+
+    .course-desc {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* study button sits at the bottom of every card */
+    .study-btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* =========================================================
+       EMPTY STATE + ADD ROW
+       ========================================================= */
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-7) var(--space-4);
+      font-size: .98rem;
+    }
+
+    .empty[hidden] {
+      display: none;
+    }
+
+    .add-row {
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-6);
+    }
+
+    /* =========================================================
+       DIALOG
+       ========================================================= */
+    dialog.modal {
+      width: min(32rem, calc(100% - 2rem));
+      max-height: calc(100dvh - 2rem);
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--sheet);
+      color: var(--ink);
+      box-shadow: var(--shadow-pop);
+      overflow: auto;
+    }
+
+    dialog.modal::backdrop {
+      background: rgba(8, 64, 42, .45);
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      dialog.modal::backdrop {
+        background: rgba(0, 0, 0, .65);
+      }
+    }
+
+    .dlg-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-5) var(--space-5) var(--space-2);
+    }
+
+    .dlg-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.2;
+    }
+
+    .dlg-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: var(--tap);
+      height: var(--tap);
+      margin-right: calc(var(--space-2) * -1);
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-md);
+      color: var(--muted);
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+
+    .dlg-body {
+      padding: var(--space-3) var(--space-5) 0;
+    }
+
+    .dlg-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: flex-end;
+      margin-top: var(--space-4);
+      padding: var(--space-4) var(--space-5) var(--space-5);
+      border-top: 1px solid var(--line);
+    }
+
+    .dlg-foot .btn {
+      flex: 1 1 auto;
+    }
+
+    .field {
+      display: grid;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .field label {
+      font-weight: 600;
+      font-size: var(--fs-sm);
+    }
+
+    .field small {
+      color: var(--muted);
+      font-size: var(--fs-xs);
+      line-height: 1.45;
+    }
+
+    .dlg-note {
+      font-size: var(--fs-xs);
+      color: var(--muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .dlg-note code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: .1rem .35rem;
+    }
+
+    .err {
+      color: var(--bad);
+      background: var(--bad-tint);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--fs-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .err[hidden] {
+      display: none;
+    }
+
+    /* =========================================================
+       SCROLL REVEAL (only when JS is on)
+       ========================================================= */
+    .js .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--ease-slow), transform var(--ease-slow);
+    }
+
+    .js .fade-in.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =========================================================
+       HOVER (only on devices that can hover, so touch never "sticks")
+       ========================================================= */
+    @media (hover: hover) {
+      .btn:hover {
+        background: var(--btn-hover);
+        border-color: var(--btn-hover);
+      }
+
+      .btn.ghost:hover {
+        background: transparent;
+        border-color: var(--ink);
+      }
+
+      .course:hover {
+        border-color: var(--green);
+        transform: translateY(-2px);
+      }
+
+      .dlg-x:hover {
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      nav ul a:hover {
+        color: var(--ink);
+      }
+    }
+
+    /* =========================================================
+       ≥ 600px  (large phones, small tablets)
+       ========================================================= */
+    @media (min-width: 600px) {
+      .dlg-foot .btn {
+        flex: 0 0 auto;
+      }
+    }
+
+    /* =========================================================
+       ≥ 860px  (tablets landscape, laptops, desktops)
+       ========================================================= */
+    @media (min-width: 860px) {
+      .menu-btn {
+        display: none;
+      }
+
+      nav ul {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-5);
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        max-height: none;
+        overflow: visible;
+      }
+
+      nav ul a {
+        min-height: 0;
+        padding: 0;
+        font-size: .95rem;
+      }
+
+      nav ul li:last-child {
+        margin-top: 0;
+      }
+
+      nav ul li:last-child .btn {
+        width: auto;
+        min-height: 2.5rem;
+        padding: var(--space-2) var(--space-4);
+      }
+
+      .page-head {
+        padding-block: var(--space-8) var(--space-6);
+      }
+    }
+
+    /* short landscape phones: keep the sticky header from eating the screen */
+    @media (max-height: 480px) and (orientation: landscape) {
+      :root {
+        --header-h: 3rem;
+        --logo-size: 2rem;
+      }
+
+      .page-head {
+        padding-block: var(--space-5) var(--space-4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .js .fade-in {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <header id="mainHeader">
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a class="logo" href="#top">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 3l2.2 5.4L19.6 10.6l-5.4 2.2L12 18.2l-2.2-5.4L4.4 10.6l5.4-2.2z" />
+            </svg>
+          </span>
+          Ashura Study
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            aria-hidden="true">
+            <path class="l1" d="M4 7h16" />
+            <path class="l2" d="M4 12h16" />
+            <path class="l3" d="M4 17h16" />
+          </svg>
+        </button>
+        <ul id="navList">
+          <li><a href="#top" aria-current="page">Courses</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button class="btn" type="button" id="navAddBtn">Add a course</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-head">
+      <h1 class="fade-in">Your courses</h1>
+      <p class="lead fade-in">Every course keeps its own uploaded material. Open one to ask questions about it — or add
+        a new course to start building a fresh study space.</p>
+    </div>
+
+    <div class="wrap">
+      <div class="toolbar">
+        <div class="search">
+          <label for="searchInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Search courses</label>
+          <input class="input" id="searchInput" type="search" placeholder="Search courses…" autocomplete="off"
+            enterkeyhint="search">
+        </div>
+        <p class="count" id="count" aria-live="polite">0 courses</p>
+      </div>
+
+      <div class="courses" id="courseGrid"></div>
+      <p class="empty" id="emptyState" hidden></p>
+
+      <div class="add-row">
+        <button class="btn" type="button" id="addBtn">
+          <span aria-hidden="true" style="margin-right:.5rem;font-size:1.15rem;line-height:0;">+</span>
+          Add a course
+        </button>
+      </div>
+    </div>
+
+    <section id="how">
+      <div class="wrap">
+        <h2 class="fade-in">What a course holds</h2>
+        <p class="sub fade-in">Each course is a container for one subject&rsquo;s material and conversations.</p>
+        <div class="feat">
+          <div class="fade-in">
+            <h3>Its own uploads</h3>
+            <p>Documents added to a course stay with it, so answers only ever come from the right material.</p>
+          </div>
+          <div class="fade-in">
+            <h3>A readable name and slug</h3>
+            <p>The name is what you see; the slug is the short, URL-safe version used in links.</p>
+          </div>
+          <div class="fade-in">
+            <h3>A short description</h3>
+            <p>A line or two so you remember what the course covers when the list grows.</p>
+          </div>
+          <div class="fade-in">
+            <h3>A unique ID</h3>
+            <p>Generated automatically the moment you create the course — you never have to type it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="fcols">
+        <div class="fbrand">
+          <h3>Ashura Study</h3>
+          <p>An AI study assistant that answers questions about the material you upload.</p>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="#top">Courses</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help centre</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of service</a></li>
+          </ul>
+        </div>
+        <div id="contact">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">Telegram channel</a></li>
+            <li><a href="#">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>&copy; <span id="yr">2026</span> Ashura Study</span>
+        <span>AI can make mistakes — always check the source it cites.</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="addDialog" aria-labelledby="dlgTitle">
+    <form id="addForm" novalidate>
+      <div class="dlg-head">
+        <h2 class="dlg-title" id="dlgTitle">Add a course</h2>
+        <button class="dlg-x" type="button" id="dlgClose" aria-label="Close">&#10005;</button>
+      </div>
+
+      <div class="dlg-body">
+        <div class="field">
+          <label for="fName">Course name</label>
+          <input class="input" id="fName" name="name" type="text" maxlength="80" required autocomplete="off"
+            placeholder="e.g. Organic Chemistry">
+        </div>
+
+        <div class="field">
+          <label for="fSlug">Slug</label>
+          <input class="input" id="fSlug" name="slug" type="text" maxlength="60" autocomplete="off"
+            placeholder="organic-chemistry" spellcheck="false">
+          <small>Used in the course URL. Filled in from the name — edit it if you prefer.</small>
+        </div>
+
+        <div class="field">
+          <label for="fDesc">Description</label>
+          <textarea class="input" id="fDesc" name="description" rows="4" maxlength="400"
+            placeholder="What does this course cover?"></textarea>
+        </div>
+
+        <p class="dlg-note">ID: <code id="fId">crs_000000</code> — generated automatically.</p>
+
+        <p class="err" id="formErr" role="alert" hidden></p>
+      </div>
+
+      <div class="dlg-foot">
+        <button class="btn ghost" type="button" id="dlgCancel">Cancel</button>
+        <button class="btn" type="submit">Add course</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================
+         DATA
+         ========================================================= */
+      var STORE = 'ashura.courses.v1';
+
+      var SEED = [
+        {
+          id: 'crs_3f9a1b',
+          name: 'Cell Biology',
+          slug: 'cell-biology',
+          description: 'Membranes, organelles, transport and cell division, built around the BIO 201 lecture slides.'
+        },
+        {
+          id: 'crs_7c2e04',
+          name: 'Organic Chemistry',
+          slug: 'organic-chemistry',
+          description: 'Nomenclature, reaction mechanisms and functional groups, with worked past-paper examples.'
+        },
+        {
+          id: 'crs_b81d55',
+          name: 'Microeconomics',
+          slug: 'microeconomics',
+          description: 'Demand and supply, elasticity, market structures and consumer behaviour.'
+        }
+      ];
+
+      var courses = [];
+      try {
+        var raw = localStorage.getItem(STORE);
+        if (raw === null) {
+          courses = SEED.slice();
+          localStorage.setItem(STORE, JSON.stringify(courses));
+        } else {
+          var parsed = JSON.parse(raw);
+          courses = Array.isArray(parsed) ? parsed : [];
+        }
+      } catch (e) {
+        courses = SEED.slice();
+      }
+
+      function save() {
+        try { localStorage.setItem(STORE, JSON.stringify(courses)); } catch (e) { /* quota / private mode */ }
+      }
+
+      /* =========================================================
+         HELPERS
+         ========================================================= */
+      function uid() {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+          return 'crs_' + window.crypto.randomUUID().replace(/-/g, '').slice(0, 8);
+        }
+        return 'crs_' + Math.random().toString(16).slice(2, 10);
+      }
+
+      function slugify(value) {
+        return String(value)
+          .toLowerCase()
+          .trim()
+          .replace(/['\u2019]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 60);
+      }
+
+      function uniqueSlug(base) {
+        var root = base || 'course';
+        var candidate = root;
+        var n = 2;
+        while (courses.some(function (c) { return c.slug === candidate; })) {
+          candidate = root + '-' + n;
+          n++;
+        }
+        return candidate;
+      }
+
+      /* =========================================================
+         DOM
+         ========================================================= */
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      var grid = document.getElementById('courseGrid');
+      var emptyState = document.getElementById('emptyState');
+      var countEl = document.getElementById('count');
+      var searchInput = document.getElementById('searchInput');
+
+      function makeCard(course, isNew) {
+        var card = document.createElement('article');
+        card.className = 'course' + (isNew ? ' is-new' : '');
+        card.dataset.id = course.id;
+
+        var name = document.createElement('h3');
+        name.className = 'course-name';
+        name.textContent = course.name;
+
+        var desc = document.createElement('p');
+        desc.className = 'course-desc';
+        desc.textContent = course.description || 'No description yet.';
+
+        var study = document.createElement('button');
+        study.type = 'button';
+        study.className = 'btn study-btn';
+        study.textContent = 'Study';
+        study.setAttribute('aria-label', 'Study ' + course.name);
+
+        card.appendChild(name);
+        card.appendChild(desc);
+        card.appendChild(study);
+
+        return card;
+      }
+
+      function render(highlightId) {
+        var q = searchInput.value.trim().toLowerCase();
+
+        var list = courses.filter(function (c) {
+          if (!q) return true;
+          return (c.name + ' ' + c.slug + ' ' + (c.description || '')).toLowerCase().indexOf(q) !== -1;
+        });
+
+        grid.textContent = '';
+        list.forEach(function (c) {
+          grid.appendChild(makeCard(c, c.id === highlightId));
+        });
+
+        countEl.textContent = list.length + (list.length === 1 ? ' course' : ' courses');
+
+        if (list.length === 0) {
+          emptyState.hidden = false;
+          emptyState.textContent = courses.length === 0
+            ? 'No courses yet — add your first course to get started.'
+            : 'No courses match \u201C' + searchInput.value.trim() + '\u201D.';
+        } else {
+          emptyState.hidden = true;
+        }
+
+        if (highlightId) {
+          var el = grid.querySelector('[data-id="' + highlightId + '"]');
+          if (el) {
+            el.setAttribute('tabindex', '-1');
+            el.focus({ preventScroll: true });
+          }
+        }
+      }
+
+      searchInput.addEventListener('input', function () { render(); });
+      render();
+
+      /* =========================================================
+         MOBILE MENU
+         ========================================================= */
+      var menuBtn = document.getElementById('menuBtn');
+      var navList = document.getElementById('navList');
+
+      function setMenu(open) {
+        navList.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open);
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setMenu(!navList.classList.contains('open'));
+      });
+      navList.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+      document.addEventListener('click', function (e) {
+        if (!navList.contains(e.target) && e.target !== menuBtn) setMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      if (window.matchMedia) {
+        var mq = window.matchMedia('(min-width: 860px)');
+        var onMq = function (e) { if (e.matches) setMenu(false); };
+        if (mq.addEventListener) mq.addEventListener('change', onMq);
+        else if (mq.addListener) mq.addListener(onMq);
+      }
+
+      /* =========================================================
+         HEADER SHADOW ON SCROLL
+         ========================================================= */
+      var header = document.getElementById('mainHeader');
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      /* =========================================================
+         ADD-COURSE DIALOG
+         ========================================================= */
+      var dlg = document.getElementById('addDialog');
+      var form = document.getElementById('addForm');
+      var fName = document.getElementById('fName');
+      var fSlug = document.getElementById('fSlug');
+      var fDesc = document.getElementById('fDesc');
+      var fId = document.getElementById('fId');
+      var formErr = document.getElementById('formErr');
+      var slugTouched = false;
+      var pendingId = '';
+
+      function showError(message) {
+        formErr.textContent = message;
+        formErr.hidden = false;
+      }
+
+      function clearError() {
+        formErr.hidden = true;
+        formErr.textContent = '';
+      }
+
+      function openDialog() {
+        form.reset();
+        clearError();
+        slugTouched = false;
+        pendingId = uid();
+        fId.textContent = pendingId;
+
+        if (typeof dlg.showModal === 'function') {
+          dlg.showModal();
+        } else {
+          dlg.setAttribute('open', '');
+        }
+
+        window.setTimeout(function () { fName.focus(); }, 40);
+      }
+
+      function closeDialog() {
+        if (typeof dlg.close === 'function' && dlg.open) {
+          dlg.close();
+        } else {
+          dlg.removeAttribute('open');
+        }
+      }
+
+      document.getElementById('addBtn').addEventListener('click', openDialog);
+      document.getElementById('navAddBtn').addEventListener('click', function () {
+        setMenu(false);
+        openDialog();
+      });
+      document.getElementById('dlgClose').addEventListener('click', closeDialog);
+      document.getElementById('dlgCancel').addEventListener('click', closeDialog);
+
+      /* click on the backdrop (outside the dialog box) closes it */
+      dlg.addEventListener('click', function (e) {
+        var r = dlg.getBoundingClientRect();
+        var outside = e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        if (outside) closeDialog();
+      });
+
+      /* slug follows the name until the user edits it by hand */
+      fName.addEventListener('input', function () {
+        if (!slugTouched) fSlug.value = slugify(fName.value);
+        if (!formErr.hidden) clearError();
+      });
+
+      fSlug.addEventListener('input', function () {
+        slugTouched = fSlug.value.trim() !== '';
+        if (!formErr.hidden) clearError();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var name = fName.value.trim().replace(/\s+/g, ' ');
+        var description = fDesc.value.trim();
+        var slugInput = fSlug.value.trim();
+
+        if (name.length < 2) {
+          showError('Give the course a name of at least 2 characters.');
+          fName.focus();
+          return;
+        }
+
+        var baseSlug = slugify(slugInput || name);
+        if (!baseSlug) {
+          showError('The slug can only contain letters and numbers.');
+          fSlug.focus();
+          return;
+        }
+
+        var course = {
+          id: pendingId || uid(),
+          name: name,
+          slug: uniqueSlug(baseSlug),
+          description: description
+        };
+
+        courses.push(course);
+        save();
+        closeDialog();
+
+        searchInput.value = '';
+        render(course.id);
+
+        countEl.textContent = courses.length + (courses.length === 1 ? ' course' : ' courses');
+      });
+
+      /* =========================================================
+         SCROLL REVEAL
+         ========================================================= */
+      var items = document.querySelectorAll('.fade-in');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        items.forEach(function (el, i) {
+          el.style.transitionDelay = (i % 4) * 70 + 'ms';
+          io.observe(el);
+        });
+      } else {
+        items.forEach(function (el) { el.classList.add('in'); });
+      }
+    })();
+  </script>
+</body>
+
+</html>

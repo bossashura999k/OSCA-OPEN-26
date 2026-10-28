@@ -1,0 +1,50 @@
+
+in cloudfare R2 bucket public /courses.json
+
+GET /courses — array of a course
+[
+  {
+	displayName : [ Mathematics, maths ],
+	id : math
+  },
+  …
+ {}
+];
+
+
+
+GET courses/materials/
+	 header : { x-api-key : API_dsjkdku4i27928 }
+
+	get the names and ids of previously uploaded materials
+
+RESPONSE :
+[
+  {
+	displayName : [ Mathematics, maths ],
+	id : math,
+	filetype : pdf||image,
+	preview : "image source url" //Like the first pages
+  },
+  …
+ {}
+];
+
+
+
+GET courses/materials/:id
+	get a practical material
+
+
+
+
+POST /courses/ask — ask a question, get an answer
+
+body : {
+	question: "What is ….?"
+	material : [ "id","id] // reference multiple material
+}
+
+
+
+ 
