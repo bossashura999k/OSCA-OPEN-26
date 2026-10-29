@@ -115,7 +115,7 @@ Store is in-memory, resets on server restart. Text-paste materials only (no PDF/
 
 ## Demo
 
-Backup demo video: [FILL IN: link after you record it]
+Backup demo video: <https://ashura.site/open-build>
 
 ## Licence
 
