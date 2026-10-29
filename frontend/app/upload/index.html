@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
     rel="stylesheet">
+  <base href="https://ashura-ai-study.vercel.app" />
 
   <style>
     /* =========================================================
@@ -1131,7 +1132,7 @@
   <header id="mainHeader">
     <div class="wrap">
       <nav aria-label="Main">
-        <a class="logo" href="../">
+        <a class="logo" href="/">
           <span class="mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -1149,10 +1150,10 @@
           </svg>
         </button>
         <ul id="navList">
-          <li><a href="../">Courses</a></li>
+          <li><a href="/app/">Courses</a></li>
           <li><a href="#top" aria-current="page">Materials</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a class="btn" href="../">Back to courses</a></li>
+          <li><a class="btn" href="/app/">Back to courses</a></li>
         </ul>
       </nav>
     </div>
@@ -1170,7 +1171,7 @@
         <p class="switcher-label" id="switcherLabel">Course</p>
         <div class="course-toggle" id="courseToggle" role="radiogroup" aria-labelledby="switcherLabel"></div>
         <p class="switcher-note" id="switcherNote" hidden>
-          You don&rsquo;t have any courses yet. <a href="../">Add a course</a> first, then come back here to
+          You don&rsquo;t have any courses yet. <a href="/app/">Add a course</a> first, then come back here to
           upload its material.
         </p>
       </div>
@@ -1231,9 +1232,9 @@
           </div>
 
           <div class="field">
-            <label class="field-label" for="fTitle">Title</label>
+            <label class="field-label" for="fTitle">Topic</label>
             <input class="input" id="fTitle" name="title" type="text" maxlength="90" autocomplete="off"
-              placeholder="e.g. Lecture 1 — Membrane structure">
+              placeholder="Membrane structure">
           </div>
 
           <div class="field" id="textField">
@@ -1278,7 +1279,7 @@
         <div>
           <h3>Quick links</h3>
           <ul>
-            <li><a href="../">Courses</a></li>
+            <li><a href="/app/">Courses</a></li>
             <li><a href="#top">Materials</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -1614,7 +1615,7 @@
 
         var askBtn = document.createElement('a');
         // Use relative path to ask page, passing course and material IDs
-        askBtn.href = '../ask/?courseId=' + encodeURIComponent(m.courseId) + '&materialId=' + encodeURIComponent(m.id);
+        askBtn.href = '/app/ask/?courseId=' + encodeURIComponent(m.courseId) + '&materialId=' + encodeURIComponent(m.id);
         askBtn.className = 'btn';
         askBtn.textContent = 'Ask';
         askBtn.setAttribute('aria-label', 'Ask questions about ' + m.title);

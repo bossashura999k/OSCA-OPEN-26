@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
     rel="stylesheet">
+  <base href="https://ashura-ai-study.vercel.app" />
 
   <style>
     /* =========================================================
@@ -1153,13 +1154,13 @@
         actions.className = 'course-actions';
 
         var uploadBtn = document.createElement('a');
-        uploadBtn.href = './upload';
+        uploadBtn.href = '/app/upload/';
         uploadBtn.className = 'btn ghost';
         uploadBtn.textContent = 'Upload materials';
         uploadBtn.setAttribute('aria-label', 'Upload materials for ' + course.name);
 
         var askBtn = document.createElement('a');
-        askBtn.href = './ask';
+        askBtn.href = '/app/ask/';
         askBtn.className = 'btn';
         askBtn.textContent = 'Ask Questions';
         askBtn.setAttribute('aria-label', 'Ask questions about ' + course.name);

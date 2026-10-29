@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
     rel="stylesheet">
+  <base href="https://ashura-ai-study.vercel.app" />
 
   <style>
     /* =========================================================
@@ -511,7 +512,7 @@
       padding: 0;
       margin: 0;
       list-style: none;
-      
+
       /* Animation */
       opacity: 0;
       transform: translateY(-4px);
@@ -528,13 +529,16 @@
     .combobox-list::-webkit-scrollbar {
       width: 8px;
     }
+
     .combobox-list::-webkit-scrollbar-track {
       background: transparent;
     }
+
     .combobox-list::-webkit-scrollbar-thumb {
       background: var(--line);
       border-radius: 4px;
     }
+
     .combobox-list::-webkit-scrollbar-thumb:hover {
       background: var(--muted);
     }
@@ -560,7 +564,8 @@
       border-bottom: none;
     }
 
-    .combobox-item:hover, .combobox-item.highlighted {
+    .combobox-item:hover,
+    .combobox-item.highlighted {
       background: var(--ok-tint);
     }
 
@@ -715,8 +720,8 @@
       color: var(--muted);
     }
 
-    .msg.ai p + p,
-    .msg.ai p + ul {
+    .msg.ai p+p,
+    .msg.ai p+ul {
       margin-top: var(--space-2);
     }
 
@@ -1025,7 +1030,7 @@
   <header id="mainHeader">
     <div class="wrap">
       <nav aria-label="Main">
-        <a class="logo" href="../">
+        <a class="logo" href="/">
           <span class="mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -1043,11 +1048,12 @@
           </svg>
         </button>
         <ul id="navList">
-          <li><a href="../">Courses</a></li>
-          <li><a href="../upload">Materials</a></li>
+
+          <li><a href="/app/">Courses</a></li>
+          <li><a href="/app/upload">Materials</a></li>
           <li><a href="#top" aria-current="page">Ask</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a class="btn" href="../upload">Upload material</a></li>
+          <li><a class="btn" href="/app/upload">Upload material</a></li>
         </ul>
       </nav>
     </div>
@@ -1070,7 +1076,8 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" class="combobox-input" placeholder="Search courses..." autocomplete="off" aria-expanded="false" aria-controls="courseList">
+              <input type="text" class="combobox-input" placeholder="Search courses..." autocomplete="off"
+                aria-expanded="false" aria-controls="courseList">
             </div>
             <ul class="combobox-list" id="courseList" role="listbox"></ul>
           </div>
@@ -1084,7 +1091,8 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" class="combobox-input" placeholder="Search materials..." autocomplete="off" aria-expanded="false" aria-controls="materialList">
+              <input type="text" class="combobox-input" placeholder="Search materials..." autocomplete="off"
+                aria-expanded="false" aria-controls="materialList">
             </div>
             <ul class="combobox-list" id="materialList" role="listbox"></ul>
           </div>
@@ -1130,8 +1138,8 @@
         <div>
           <h3>Quick links</h3>
           <ul>
-            <li><a href="../">Courses</a></li>
-            <li><a href="../upload">Materials</a></li>
+            <li><a href="/app/">Courses</a></li>
+            <li><a href="/app/upload/">Materials</a></li>
             <li><a href="#top">Ask</a></li>
           </ul>
         </div>
@@ -1160,279 +1168,279 @@
   </footer>
 
   <script>
-    (function () {
-      'use strict';
+      (function () {
+        'use strict';
 
-      /* =========================================================
-         STORAGE
-         ========================================================= */
-      var COURSES_KEY = 'ashura.courses.v1';
-      var MAT_KEY = 'ashura.materials.v1';
+        /* =========================================================
+           STORAGE
+           ========================================================= */
+        var COURSES_KEY = 'ashura.courses.v1';
+        var MAT_KEY = 'ashura.materials.v1';
 
-      var SEED_COURSES = [
-        { id: 'crs_3f9a1b', name: 'Cell Biology', slug: 'cell-biology', description: 'Membranes, organelles, transport and cell division.' },
-        { id: 'crs_7c2e04', name: 'Organic Chemistry', slug: 'organic-chemistry', description: 'Nomenclature, reaction mechanisms and functional groups.' },
-        { id: 'crs_b81d55', name: 'Microeconomics', slug: 'microeconomics', description: 'Demand and supply, elasticity and market structures.' }
-      ];
+        var SEED_COURSES = [
+          { id: 'crs_3f9a1b', name: 'Cell Biology', slug: 'cell-biology', description: 'Membranes, organelles, transport and cell division.' },
+          { id: 'crs_7c2e04', name: 'Organic Chemistry', slug: 'organic-chemistry', description: 'Nomenclature, reaction mechanisms and functional groups.' },
+          { id: 'crs_b81d55', name: 'Microeconomics', slug: 'microeconomics', description: 'Demand and supply, elasticity and market structures.' }
+        ];
 
-      var DAY = 86400000;
-      var NOW = Date.now();
+        var DAY = 86400000;
+        var NOW = Date.now();
 
-      var SEED_MATERIALS = [
-        {
-          id: 'mat_4d5e6f', courseId: 'crs_3f9a1b', format: 'text',
-          title: 'Quick notes on osmosis',
-          text: 'Osmosis is the movement of water across a partially permeable membrane, from a region of higher water potential to a region of lower water potential.\n\nWater potential is measured in kPa. Pure water has a water potential of 0 kPa. Adding solute lowers the water potential, making it negative.\n\nKey exam point: osmosis is passive, which means no ATP is used.\n\nDiffusion differs from osmosis because diffusion moves any particle down its concentration gradient, while osmosis only moves water.',
-          createdAt: NOW - 2 * DAY
-        },
-        {
-          id: 'mat_1a2b3c', courseId: 'crs_3f9a1b', format: 'pdf',
-          title: 'Lecture 1 — Membrane structure',
-          fileName: 'BIO201-L1.pdf', size: 1240000, createdAt: NOW - 3 * DAY
-        },
-        {
-          id: 'mat_7g8h9i', courseId: 'crs_7c2e04', format: 'doc',
-          title: 'Reaction mechanism summary',
-          fileName: 'mechanisms.docx', size: 320000, createdAt: NOW - DAY
-        },
-        {
-          id: 'mat_0j1k2l', courseId: 'crs_b81d55', format: 'image',
-          title: 'Elasticity diagram from the board',
-          fileName: 'elasticity-board.jpg', size: 890000, createdAt: NOW - 6 * 3600000
-        }
-      ];
+        var SEED_MATERIALS = [
+          {
+            id: 'mat_4d5e6f', courseId: 'crs_3f9a1b', format: 'text',
+            title: 'Quick notes on osmosis',
+            text: 'Osmosis is the movement of water across a partially permeable membrane, from a region of higher water potential to a region of lower water potential.\n\nWater potential is measured in kPa. Pure water has a water potential of 0 kPa. Adding solute lowers the water potential, making it negative.\n\nKey exam point: osmosis is passive, which means no ATP is used.\n\nDiffusion differs from osmosis because diffusion moves any particle down its concentration gradient, while osmosis only moves water.',
+            createdAt: NOW - 2 * DAY
+          },
+          {
+            id: 'mat_1a2b3c', courseId: 'crs_3f9a1b', format: 'pdf',
+            title: 'Lecture 1 — Membrane structure',
+            fileName: 'BIO201-L1.pdf', size: 1240000, createdAt: NOW - 3 * DAY
+          },
+          {
+            id: 'mat_7g8h9i', courseId: 'crs_7c2e04', format: 'doc',
+            title: 'Reaction mechanism summary',
+            fileName: 'mechanisms.docx', size: 320000, createdAt: NOW - DAY
+          },
+          {
+            id: 'mat_0j1k2l', courseId: 'crs_b81d55', format: 'image',
+            title: 'Elasticity diagram from the board',
+            fileName: 'elasticity-board.jpg', size: 890000, createdAt: NOW - 6 * 3600000
+          }
+        ];
 
-      function readJSON(key) {
-        try {
-          var raw = localStorage.getItem(key);
-          return raw === null ? null : JSON.parse(raw);
-        } catch (e) {
-          return null;
-        }
-      }
-
-      function writeJSON(key, value) {
-        try {
-          localStorage.setItem(key, JSON.stringify(value));
-          return true;
-        } catch (e) {
-          return false;
-        }
-      }
-
-      var courses = readJSON(COURSES_KEY);
-      if (!Array.isArray(courses)) {
-        courses = SEED_COURSES.slice();
-        writeJSON(COURSES_KEY, courses);
-      }
-
-      var materials = readJSON(MAT_KEY);
-      if (!Array.isArray(materials)) {
-        materials = SEED_MATERIALS.slice();
-        writeJSON(MAT_KEY, materials);
-      }
-
-      /* =========================================================
-         FORMAT LABELS
-         ========================================================= */
-      var BADGE = { text: 'TXT', pdf: 'PDF', doc: 'DOC', image: 'IMG' };
-      var FORMAT_LABEL = { text: 'text note', pdf: 'PDF', doc: 'Word document', image: 'image' };
-
-      /* =========================================================
-         DOM
-         ========================================================= */
-      document.getElementById('yr').textContent = new Date().getFullYear();
-
-      var courseCombobox = document.getElementById('courseCombobox');
-      var courseInput = courseCombobox.querySelector('.combobox-input');
-      var courseList = courseCombobox.querySelector('.combobox-list');
-
-      var matCombobox = document.getElementById('materialCombobox');
-      var matInput = matCombobox.querySelector('.combobox-input');
-      var matList = matCombobox.querySelector('.combobox-list');
-
-      var docChip = document.getElementById('docChip');
-      var docIco = document.getElementById('docIco');
-      var docName = document.getElementById('docName');
-      var docTag = document.getElementById('docTag');
-
-      var log = document.getElementById('chatLog');
-      var chips = document.getElementById('chips');
-      var composer = document.getElementById('composer');
-      var input = document.getElementById('qInput');
-      var sendBtn = document.getElementById('sendBtn');
-
-      /* =========================================================
-         STATE
-         ========================================================= */
-      var activeCourseId = courses.length ? courses[0].id : null;
-      var activeMaterialId = null;
-      var pendingQuiz = null;
-      var busy = false;
-
-      /* =========================================================
-         TEXT HELPERS
-         ========================================================= */
-      var STOP = {};
-      'a an the is are was were be been being of in on to for and or it this that what how why when which who do does ' +
-        'did can could should would you me my i we our your about with from at by as if so then than into over under ' +
-        'there their they he she not no but also just some any more most such very'.split(' ')
-        .forEach(function (w) { STOP[w] = 1; });
-
-      function esc(value) {
-        return String(value == null ? '' : value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
-      function escapeReg(value) {
-        return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      }
-
-      function tokensOf(value) {
-        return String(value || '')
-          .toLowerCase()
-          .replace(/[^a-z0-9\s]/g, ' ')
-          .split(/\s+/)
-          .filter(function (w) { return w.length > 2 && !STOP[w]; });
-      }
-
-      function sentencesOf(value) {
-        var text = String(value || '').replace(/\s+/g, ' ').trim();
-        if (!text) return [];
-
-        var out = [];
-        var current = '';
-
-        for (var i = 0; i < text.length; i++) {
-          current += text.charAt(i);
-          var isEnd = /[.!?]/.test(text.charAt(i));
-          var atBreak = (i + 1 >= text.length) || text.charAt(i + 1) === ' ';
-          if (isEnd && atBreak) {
-            out.push(current.trim());
-            current = '';
+        function readJSON(key) {
+          try {
+            var raw = localStorage.getItem(key);
+            return raw === null ? null : JSON.parse(raw);
+          } catch (e) {
+            return null;
           }
         }
 
-        if (current.trim()) out.push(current.trim());
-
-        return out.filter(function (s) { return s.length > 2; });
-      }
-
-      function normalize(value) {
-        return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      }
-
-      /* =========================================================
-         DATA ACCESS
-         ========================================================= */
-      function currentCourse() {
-        return courses.filter(function (c) { return c.id === activeCourseId; })[0] || null;
-      }
-
-      function currentMaterial() {
-        return materials.filter(function (m) { return m.id === activeMaterialId; })[0] || null;
-      }
-
-      function courseMaterials(courseId) {
-        return materials
-          .filter(function (m) { return m.courseId === courseId; })
-          .sort(function (a, b) { return b.createdAt - a.createdAt; });
-      }
-
-      /* =========================================================
-         COMBOBOX LOGIC
-         ========================================================= */
-      function toggleList(combobox, open) {
-        var list = combobox.querySelector('.combobox-list');
-        var input = combobox.querySelector('.combobox-input');
-        if (open) {
-          list.classList.add('open');
-          input.setAttribute('aria-expanded', 'true');
-        } else {
-          list.classList.remove('open');
-          input.setAttribute('aria-expanded', 'false');
+        function writeJSON(key, value) {
+          try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+          } catch (e) {
+            return false;
+          }
         }
-      }
 
-      function closeAllLists() {
-        toggleList(courseCombobox, false);
-        toggleList(matCombobox, false);
-      }
-
-      document.addEventListener('click', function(e) {
-        if (!courseCombobox.contains(e.target)) toggleList(courseCombobox, false);
-        if (!matCombobox.contains(e.target)) toggleList(matCombobox, false);
-      });
-
-      courseInput.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleList(courseCombobox, true);
-        toggleList(matCombobox, false);
-        renderCourseList(); 
-      });
-
-      courseInput.addEventListener('input', function() {
-        renderCourseList(courseInput.value);
-      });
-
-      courseInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          var first = courseList.querySelector('.combobox-item[data-id]');
-          if (first) first.click();
+        var courses = readJSON(COURSES_KEY);
+        if (!Array.isArray(courses)) {
+          courses = SEED_COURSES.slice();
+          writeJSON(COURSES_KEY, courses);
         }
-      });
 
-      matInput.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (matInput.disabled) return;
-        toggleList(matCombobox, true);
-        toggleList(courseCombobox, false);
-        renderMaterialList();
-      });
-
-      matInput.addEventListener('input', function() {
-        renderMaterialList(matInput.value);
-      });
-
-      matInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          var first = matList.querySelector('.combobox-item[data-id]');
-          if (first) first.click();
+        var materials = readJSON(MAT_KEY);
+        if (!Array.isArray(materials)) {
+          materials = SEED_MATERIALS.slice();
+          writeJSON(MAT_KEY, materials);
         }
-      });
 
-      function renderCourseList(filter) {
-        courseList.innerHTML = '';
-        var q = (filter || '').toLowerCase();
-        
-        var filtered = courses.filter(function(c) {
-          return c.name.toLowerCase().indexOf(q) !== -1 || (c.description || '').toLowerCase().indexOf(q) !== -1;
+        /* =========================================================
+           FORMAT LABELS
+           ========================================================= */
+        var BADGE = { text: 'TXT', pdf: 'PDF', doc: 'DOC', image: 'IMG' };
+        var FORMAT_LABEL = { text: 'text note', pdf: 'PDF', doc: 'Word document', image: 'image' };
+
+        /* =========================================================
+           DOM
+           ========================================================= */
+        document.getElementById('yr').textContent = new Date().getFullYear();
+
+        var courseCombobox = document.getElementById('courseCombobox');
+        var courseInput = courseCombobox.querySelector('.combobox-input');
+        var courseList = courseCombobox.querySelector('.combobox-list');
+
+        var matCombobox = document.getElementById('materialCombobox');
+        var matInput = matCombobox.querySelector('.combobox-input');
+        var matList = matCombobox.querySelector('.combobox-list');
+
+        var docChip = document.getElementById('docChip');
+        var docIco = document.getElementById('docIco');
+        var docName = document.getElementById('docName');
+        var docTag = document.getElementById('docTag');
+
+        var log = document.getElementById('chatLog');
+        var chips = document.getElementById('chips');
+        var composer = document.getElementById('composer');
+        var input = document.getElementById('qInput');
+        var sendBtn = document.getElementById('sendBtn');
+
+        /* =========================================================
+           STATE
+           ========================================================= */
+        var activeCourseId = courses.length ? courses[0].id : null;
+        var activeMaterialId = null;
+        var pendingQuiz = null;
+        var busy = false;
+
+        /* =========================================================
+           TEXT HELPERS
+           ========================================================= */
+        var STOP = {};
+        'a an the is are was were be been being of in on to for and or it this that what how why when which who do does ' +
+          'did can could should would you me my i we our your about with from at by as if so then than into over under ' +
+          'there their they he she not no but also just some any more most such very'.split(' ')
+            .forEach(function (w) { STOP[w] = 1; });
+
+        function esc(value) {
+          return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        function escapeReg(value) {
+          return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function tokensOf(value) {
+          return String(value || '')
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, ' ')
+            .split(/\s+/)
+            .filter(function (w) { return w.length > 2 && !STOP[w]; });
+        }
+
+        function sentencesOf(value) {
+          var text = String(value || '').replace(/\s+/g, ' ').trim();
+          if (!text) return [];
+
+          var out = [];
+          var current = '';
+
+          for (var i = 0; i < text.length; i++) {
+            current += text.charAt(i);
+            var isEnd = /[.!?]/.test(text.charAt(i));
+            var atBreak = (i + 1 >= text.length) || text.charAt(i + 1) === ' ';
+            if (isEnd && atBreak) {
+              out.push(current.trim());
+              current = '';
+            }
+          }
+
+          if (current.trim()) out.push(current.trim());
+
+          return out.filter(function (s) { return s.length > 2; });
+        }
+
+        function normalize(value) {
+          return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        }
+
+        /* =========================================================
+           DATA ACCESS
+           ========================================================= */
+        function currentCourse() {
+          return courses.filter(function (c) { return c.id === activeCourseId; })[0] || null;
+        }
+
+        function currentMaterial() {
+          return materials.filter(function (m) { return m.id === activeMaterialId; })[0] || null;
+        }
+
+        function courseMaterials(courseId) {
+          return materials
+            .filter(function (m) { return m.courseId === courseId; })
+            .sort(function (a, b) { return b.createdAt - a.createdAt; });
+        }
+
+        /* =========================================================
+           COMBOBOX LOGIC
+           ========================================================= */
+        function toggleList(combobox, open) {
+          var list = combobox.querySelector('.combobox-list');
+          var input = combobox.querySelector('.combobox-input');
+          if (open) {
+            list.classList.add('open');
+            input.setAttribute('aria-expanded', 'true');
+          } else {
+            list.classList.remove('open');
+            input.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        function closeAllLists() {
+          toggleList(courseCombobox, false);
+          toggleList(matCombobox, false);
+        }
+
+        document.addEventListener('click', function (e) {
+          if (!courseCombobox.contains(e.target)) toggleList(courseCombobox, false);
+          if (!matCombobox.contains(e.target)) toggleList(matCombobox, false);
         });
 
-        if (!filtered.length) {
-          var empty = document.createElement('li');
-          empty.className = 'combobox-item';
-          empty.style.color = 'var(--muted)';
-          empty.style.cursor = 'default';
-          empty.textContent = 'No courses found';
-          courseList.appendChild(empty);
-          return;
-        }
+        courseInput.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleList(courseCombobox, true);
+          toggleList(matCombobox, false);
+          renderCourseList();
+        });
 
-        filtered.forEach(function(c) {
-          var li = document.createElement('li');
-          li.className = 'combobox-item';
-          li.setAttribute('role', 'option');
-          li.setAttribute('aria-selected', c.id === activeCourseId);
-          li.dataset.id = c.id;
-          
-          li.innerHTML = `
+        courseInput.addEventListener('input', function () {
+          renderCourseList(courseInput.value);
+        });
+
+        courseInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            var first = courseList.querySelector('.combobox-item[data-id]');
+            if (first) first.click();
+          }
+        });
+
+        matInput.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (matInput.disabled) return;
+          toggleList(matCombobox, true);
+          toggleList(courseCombobox, false);
+          renderMaterialList();
+        });
+
+        matInput.addEventListener('input', function () {
+          renderMaterialList(matInput.value);
+        });
+
+        matInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            var first = matList.querySelector('.combobox-item[data-id]');
+            if (first) first.click();
+          }
+        });
+
+        function renderCourseList(filter) {
+          courseList.innerHTML = '';
+          var q = (filter || '').toLowerCase();
+
+          var filtered = courses.filter(function (c) {
+            return c.name.toLowerCase().indexOf(q) !== -1 || (c.description || '').toLowerCase().indexOf(q) !== -1;
+          });
+
+          if (!filtered.length) {
+            var empty = document.createElement('li');
+            empty.className = 'combobox-item';
+            empty.style.color = 'var(--muted)';
+            empty.style.cursor = 'default';
+            empty.textContent = 'No courses found';
+            courseList.appendChild(empty);
+            return;
+          }
+
+          filtered.forEach(function (c) {
+            var li = document.createElement('li');
+            li.className = 'combobox-item';
+            li.setAttribute('role', 'option');
+            li.setAttribute('aria-selected', c.id === activeCourseId);
+            li.dataset.id = c.id;
+
+            li.innerHTML = `
             <svg class="book-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
               <rect x="3" y="6" width="8" height="12" rx="1.5" fill="#60A5FA"/>
               <rect x="9" y="4" width="6" height="14" rx="1.5" fill="#34D399"/>
@@ -1444,69 +1452,69 @@
             </div>
           `;
 
-          li.addEventListener('click', function() {
-            setCourse(c.id);
-            toggleList(courseCombobox, false);
+            li.addEventListener('click', function () {
+              setCourse(c.id);
+              toggleList(courseCombobox, false);
+            });
+
+            courseList.appendChild(li);
+          });
+        }
+
+        function renderMaterialList(filter) {
+          matList.innerHTML = '';
+
+          if (!activeCourseId) {
+            matInput.disabled = true;
+            matInput.placeholder = 'Select a course first';
+            return;
+          }
+
+          matInput.disabled = false;
+          matInput.placeholder = 'Search materials...';
+
+          var q = (filter || '').toLowerCase();
+          var list = courseMaterials(activeCourseId);
+
+          if (!list.length) {
+            matInput.disabled = true;
+            matInput.placeholder = 'No materials in this course';
+            matInput.value = '';
+            activeMaterialId = null;
+            syncDocChip();
+            resetChat();
+
+            var empty = document.createElement('li');
+            empty.className = 'combobox-item';
+            empty.style.color = 'var(--muted)';
+            empty.style.cursor = 'default';
+            empty.textContent = 'No materials in this course';
+            matList.appendChild(empty);
+            return;
+          }
+
+          var filtered = list.filter(function (m) {
+            return m.title.toLowerCase().indexOf(q) !== -1 || (m.fileName || '').toLowerCase().indexOf(q) !== -1;
           });
 
-          courseList.appendChild(li);
-        });
-      }
+          if (!filtered.length) {
+            var empty = document.createElement('li');
+            empty.className = 'combobox-item';
+            empty.style.color = 'var(--muted)';
+            empty.style.cursor = 'default';
+            empty.textContent = 'No materials match your search';
+            matList.appendChild(empty);
+            return;
+          }
 
-      function renderMaterialList(filter) {
-        matList.innerHTML = '';
-        
-        if (!activeCourseId) {
-          matInput.disabled = true;
-          matInput.placeholder = 'Select a course first';
-          return;
-        }
-        
-        matInput.disabled = false;
-        matInput.placeholder = 'Search materials...';
+          filtered.forEach(function (m) {
+            var li = document.createElement('li');
+            li.className = 'combobox-item';
+            li.setAttribute('role', 'option');
+            li.setAttribute('aria-selected', m.id === activeMaterialId);
+            li.dataset.id = m.id;
 
-        var q = (filter || '').toLowerCase();
-        var list = courseMaterials(activeCourseId);
-        
-        if (!list.length) {
-          matInput.disabled = true;
-          matInput.placeholder = 'No materials in this course';
-          matInput.value = '';
-          activeMaterialId = null;
-          syncDocChip();
-          resetChat();
-          
-          var empty = document.createElement('li');
-          empty.className = 'combobox-item';
-          empty.style.color = 'var(--muted)';
-          empty.style.cursor = 'default';
-          empty.textContent = 'No materials in this course';
-          matList.appendChild(empty);
-          return;
-        }
-
-        var filtered = list.filter(function(m) {
-          return m.title.toLowerCase().indexOf(q) !== -1 || (m.fileName || '').toLowerCase().indexOf(q) !== -1;
-        });
-
-        if (!filtered.length) {
-          var empty = document.createElement('li');
-          empty.className = 'combobox-item';
-          empty.style.color = 'var(--muted)';
-          empty.style.cursor = 'default';
-          empty.textContent = 'No materials match your search';
-          matList.appendChild(empty);
-          return;
-        }
-
-        filtered.forEach(function(m) {
-          var li = document.createElement('li');
-          li.className = 'combobox-item';
-          li.setAttribute('role', 'option');
-          li.setAttribute('aria-selected', m.id === activeMaterialId);
-          li.dataset.id = m.id;
-          
-          li.innerHTML = `
+            li.innerHTML = `
             <svg class="book-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
               <rect x="3" y="6" width="8" height="12" rx="1.5" fill="#60A5FA"/>
               <rect x="9" y="4" width="6" height="14" rx="1.5" fill="#34D399"/>
@@ -1518,426 +1526,426 @@
             </div>
           `;
 
-          li.addEventListener('click', function() {
-            setMaterial(m.id);
-            toggleList(matCombobox, false);
+            li.addEventListener('click', function () {
+              setMaterial(m.id);
+              toggleList(matCombobox, false);
+            });
+
+            matList.appendChild(li);
           });
-
-          matList.appendChild(li);
-        });
-      }
-
-      /* =========================================================
-         SELECTION HANDLERS
-         ========================================================= */
-      function setCourse(id) {
-        activeCourseId = id;
-        var course = currentCourse();
-        if (course) courseInput.value = course.name;
-        
-        activeMaterialId = null;
-        matInput.value = '';
-        
-        var list = courseMaterials(activeCourseId);
-        if (list.length) {
-          activeMaterialId = list[0].id;
-          matInput.value = list[0].title;
-        }
-        
-        renderCourseList();
-        renderMaterialList();
-        syncDocChip();
-        resetChat();
-      }
-
-      function setMaterial(id) {
-        if (activeMaterialId === id) return;
-        activeMaterialId = id;
-        var m = currentMaterial();
-        if (m) matInput.value = m.title;
-        
-        renderMaterialList();
-        syncDocChip();
-        resetChat();
-      }
-
-      function syncDocChip() {
-        var m = currentMaterial();
-
-        if (!m) {
-          docChip.classList.add('is-empty');
-          docIco.textContent = '\u2014';
-          docName.textContent = 'No material selected';
-          docTag.textContent = '\u2014';
-          input.disabled = true;
-          sendBtn.disabled = true;
-          chips.hidden = true;
-          return;
         }
 
-        docChip.classList.remove('is-empty');
-        docIco.textContent = BADGE[m.format] || 'FILE';
-        docName.textContent = m.title;
-        docTag.textContent = 'Selected';
+        /* =========================================================
+           SELECTION HANDLERS
+           ========================================================= */
+        function setCourse(id) {
+          activeCourseId = id;
+          var course = currentCourse();
+          if (course) courseInput.value = course.name;
 
-        var hasText = !!(m.text && m.text.trim());
-        input.disabled = !hasText || busy;
-        sendBtn.disabled = !hasText || busy;
-        input.placeholder = hasText
-          ? 'Ask a question about this material\u2026'
-          : 'This material has no readable text yet';
-        chips.hidden = !hasText;
-      }
+          activeMaterialId = null;
+          matInput.value = '';
 
-      /* =========================================================
-         CHAT RENDERING
-         ========================================================= */
-      function scrollDown() {
-        log.scrollTop = log.scrollHeight;
-      }
+          var list = courseMaterials(activeCourseId);
+          if (list.length) {
+            activeMaterialId = list[0].id;
+            matInput.value = list[0].title;
+          }
 
-      function addUser(text) {
-        var el = document.createElement('p');
-        el.className = 'msg user';
-        el.textContent = text;
-        log.appendChild(el);
-        return el;
-      }
-
-      function addAi(html, thinking) {
-        var el = document.createElement('div');
-        el.className = 'msg ai' + (thinking ? ' thinking' : '');
-        el.innerHTML = html;
-        log.appendChild(el);
-        return el;
-      }
-
-      function resetChat() {
-        log.textContent = '';
-        pendingQuiz = null;
-        busy = false;
-
-        var m = currentMaterial();
-
-        if (!m) {
-          addAi('<p>Pick a course and a material above, then ask anything about it.</p>');
-          scrollDown();
-          return;
+          renderCourseList();
+          renderMaterialList();
+          syncDocChip();
+          resetChat();
         }
 
-        var hasText = !!(m.text && m.text.trim());
+        function setMaterial(id) {
+          if (activeMaterialId === id) return;
+          activeMaterialId = id;
+          var m = currentMaterial();
+          if (m) matInput.value = m.title;
 
-        if (hasText) {
-          addAi('<p>Ready. Ask anything about <strong>' + esc(m.title) + '</strong> — I&rsquo;ll answer from this ' +
-            'material and show you where it came from.</p>');
-        } else {
-          addAi('<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
-            ', and I can only read text notes right now. Full text extraction for PDFs, Word documents and images ' +
-            'opens when a backend is connected.</p>' +
-            '<p>Pick a text material in this course to try the chat.</p>');
+          renderMaterialList();
+          syncDocChip();
+          resetChat();
         }
 
-        scrollDown();
-      }
+        function syncDocChip() {
+          var m = currentMaterial();
 
-      function setBusy(state) {
-        busy = state;
+          if (!m) {
+            docChip.classList.add('is-empty');
+            docIco.textContent = '\u2014';
+            docName.textContent = 'No material selected';
+            docTag.textContent = '\u2014';
+            input.disabled = true;
+            sendBtn.disabled = true;
+            chips.hidden = true;
+            return;
+          }
 
-        var m = currentMaterial();
-        var hasText = !!(m && m.text && m.text.trim());
+          docChip.classList.remove('is-empty');
+          docIco.textContent = BADGE[m.format] || 'FILE';
+          docName.textContent = m.title;
+          docTag.textContent = 'Selected';
 
-        input.disabled = state || !hasText;
-        sendBtn.disabled = state || !hasText;
-
-        Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function (c) {
-          c.disabled = state || !hasText;
-        });
-      }
-
-      /* =========================================================
-         ANSWERING
-         ========================================================= */
-      function cite(m) {
-        var extra = m.format === 'text' ? '' : ' \u00B7 ' + esc(m.fileName || '');
-        return '<p class="cite">Source: &ldquo;' + esc(m.title) + '&rdquo;' + extra + '</p>';
-      }
-
-      function boldTokens(sentenceHtml, tokens) {
-        if (!tokens.length) return sentenceHtml;
-
-        var re = new RegExp('\\b(' + tokens.slice(0, 8).map(escapeReg).join('|') + ')\\b', 'gi');
-        return sentenceHtml.replace(re, '<strong>$1</strong>');
-      }
-
-      function summaryHtml(m) {
-        var sents = sentencesOf(m.text).slice(0, 4);
-
-        if (!sents.length) return '<p>There isn&rsquo;t enough text to summarise yet.</p>' + cite(m);
-
-        return '<p><strong>Summary</strong></p><ul class="mini">' +
-          sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
-          '</ul>' + cite(m);
-      }
-
-      function flashcardHtml(m) {
-        var sents = sentencesOf(m.text).slice(0, 5);
-
-        if (!sents.length) return '<p>There isn&rsquo;t enough text to build flashcards yet.</p>' + cite(m);
-
-        return '<p><strong>' + sents.length + ' quick flashcards</strong></p><ul class="mini">' +
-          sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
-          '</ul>' + cite(m);
-      }
-
-      function quizHtml(m) {
-        var sents = sentencesOf(m.text).filter(function (s) {
-          return s.split(/\s+/).length >= 6;
-        });
-
-        if (!sents.length) {
-          return '<p>This material is a bit short for a quiz. Add a longer note and try again.</p>' + cite(m);
+          var hasText = !!(m.text && m.text.trim());
+          input.disabled = !hasText || busy;
+          sendBtn.disabled = !hasText || busy;
+          input.placeholder = hasText
+            ? 'Ask a question about this material\u2026'
+            : 'This material has no readable text yet';
+          chips.hidden = !hasText;
         }
 
-        var sentence = sents[Math.floor(Math.random() * sents.length)];
-
-        var words = sentence
-          .replace(/[^A-Za-z0-9\s-]/g, ' ')
-          .split(/\s+/)
-          .filter(function (w) { return w.length >= 5 && !STOP[w.toLowerCase()]; });
-
-        if (!words.length) return summaryHtml(m);
-
-        var word = words.reduce(function (a, b) { return b.length > a.length ? b : a; }, words[0]);
-        var blanked = sentence.replace(new RegExp('\\b' + escapeReg(word) + '\\b'), '_____');
-
-        pendingQuiz = { word: word, sentence: sentence };
-
-        return '<p><strong>Fill in the blank</strong></p>' +
-          '<p>' + esc(blanked) + '</p>' +
-          '<p class="cite">Reply with the missing word and I&rsquo;ll check it.</p>' + cite(m);
-      }
-
-      function lookupHtml(m, question) {
-        var q = tokensOf(question);
-        var sents = sentencesOf(m.text);
-
-        if (!q.length) {
-          return '<p>Try a question with a few key words from the material — for example a term you want explained.</p>' +
-            cite(m);
+        /* =========================================================
+           CHAT RENDERING
+           ========================================================= */
+        function scrollDown() {
+          log.scrollTop = log.scrollHeight;
         }
 
-        var scored = sents.map(function (s, i) {
-          var low = s.toLowerCase();
-          var score = 0;
-          q.forEach(function (t) { if (low.indexOf(t) !== -1) score++; });
-          return { s: s, i: i, score: score };
-        });
-
-        var hits = scored
-          .filter(function (x) { return x.score > 0; })
-          .sort(function (a, b) { return b.score - a.score || a.i - b.i; })
-          .slice(0, 3)
-          .sort(function (a, b) { return a.i - b.i; });
-
-        if (!hits.length) {
-          var freq = {};
-          sents.forEach(function (s) {
-            tokensOf(s).forEach(function (t) { freq[t] = (freq[t] || 0) + 1; });
-          });
-
-          var keys = Object.keys(freq)
-            .sort(function (a, b) { return freq[b] - freq[a]; })
-            .slice(0, 6);
-
-          return '<p>I couldn&rsquo;t find that in &ldquo;' + esc(m.title) + '&rdquo;.</p>' +
-            (keys.length
-              ? '<p>This material covers things like ' +
-              keys.map(function (k) { return '<strong>' + esc(k) + '</strong>'; }).join(', ') +
-              '. Try one of those words, or ask me to summarise it.</p>'
-              : '<p>It&rsquo;s a short note, so try asking for a summary.</p>') +
-            cite(m);
+        function addUser(text) {
+          var el = document.createElement('p');
+          el.className = 'msg user';
+          el.textContent = text;
+          log.appendChild(el);
+          return el;
         }
 
-        var answer = hits.map(function (x) {
-          return boldTokens(esc(x.s), q);
-        }).join(' ');
-
-        return '<p>' + answer + '</p>' + cite(m);
-      }
-
-      function answerHtml(question) {
-        var m = currentMaterial();
-
-        if (!m) return '<p>Pick a material first.</p>';
-
-        var text = (m.text || '').trim();
-
-        if (!text) {
-          return '<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
-            ', so there is no readable text for me to quote yet.</p>' +
-            '<p>Text extraction for PDFs, Word documents and images opens once a backend is connected. ' +
-            'Pick a text material in this course to use the chat.</p>';
+        function addAi(html, thinking) {
+          var el = document.createElement('div');
+          el.className = 'msg ai' + (thinking ? ' thinking' : '');
+          el.innerHTML = html;
+          log.appendChild(el);
+          return el;
         }
 
-        if (pendingQuiz) {
-          var quiz = pendingQuiz;
+        function resetChat() {
+          log.textContent = '';
           pendingQuiz = null;
+          busy = false;
 
-          if (normalize(question) === normalize(quiz.word)) {
-            return '<p><strong>Correct.</strong> The missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
+          var m = currentMaterial();
+
+          if (!m) {
+            addAi('<p>Pick a course and a material above, then ask anything about it.</p>');
+            scrollDown();
+            return;
+          }
+
+          var hasText = !!(m.text && m.text.trim());
+
+          if (hasText) {
+            addAi('<p>Ready. Ask anything about <strong>' + esc(m.title) + '</strong> — I&rsquo;ll answer from this ' +
+              'material and show you where it came from.</p>');
+          } else {
+            addAi('<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
+              ', and I can only read text notes right now. Full text extraction for PDFs, Word documents and images ' +
+              'opens when a backend is connected.</p>' +
+              '<p>Pick a text material in this course to try the chat.</p>');
+          }
+
+          scrollDown();
+        }
+
+        function setBusy(state) {
+          busy = state;
+
+          var m = currentMaterial();
+          var hasText = !!(m && m.text && m.text.trim());
+
+          input.disabled = state || !hasText;
+          sendBtn.disabled = state || !hasText;
+
+          Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function (c) {
+            c.disabled = state || !hasText;
+          });
+        }
+
+        /* =========================================================
+           ANSWERING
+           ========================================================= */
+        function cite(m) {
+          var extra = m.format === 'text' ? '' : ' \u00B7 ' + esc(m.fileName || '');
+          return '<p class="cite">Source: &ldquo;' + esc(m.title) + '&rdquo;' + extra + '</p>';
+        }
+
+        function boldTokens(sentenceHtml, tokens) {
+          if (!tokens.length) return sentenceHtml;
+
+          var re = new RegExp('\\b(' + tokens.slice(0, 8).map(escapeReg).join('|') + ')\\b', 'gi');
+          return sentenceHtml.replace(re, '<strong>$1</strong>');
+        }
+
+        function summaryHtml(m) {
+          var sents = sentencesOf(m.text).slice(0, 4);
+
+          if (!sents.length) return '<p>There isn&rsquo;t enough text to summarise yet.</p>' + cite(m);
+
+          return '<p><strong>Summary</strong></p><ul class="mini">' +
+            sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
+            '</ul>' + cite(m);
+        }
+
+        function flashcardHtml(m) {
+          var sents = sentencesOf(m.text).slice(0, 5);
+
+          if (!sents.length) return '<p>There isn&rsquo;t enough text to build flashcards yet.</p>' + cite(m);
+
+          return '<p><strong>' + sents.length + ' quick flashcards</strong></p><ul class="mini">' +
+            sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
+            '</ul>' + cite(m);
+        }
+
+        function quizHtml(m) {
+          var sents = sentencesOf(m.text).filter(function (s) {
+            return s.split(/\s+/).length >= 6;
+          });
+
+          if (!sents.length) {
+            return '<p>This material is a bit short for a quiz. Add a longer note and try again.</p>' + cite(m);
+          }
+
+          var sentence = sents[Math.floor(Math.random() * sents.length)];
+
+          var words = sentence
+            .replace(/[^A-Za-z0-9\s-]/g, ' ')
+            .split(/\s+/)
+            .filter(function (w) { return w.length >= 5 && !STOP[w.toLowerCase()]; });
+
+          if (!words.length) return summaryHtml(m);
+
+          var word = words.reduce(function (a, b) { return b.length > a.length ? b : a; }, words[0]);
+          var blanked = sentence.replace(new RegExp('\\b' + escapeReg(word) + '\\b'), '_____');
+
+          pendingQuiz = { word: word, sentence: sentence };
+
+          return '<p><strong>Fill in the blank</strong></p>' +
+            '<p>' + esc(blanked) + '</p>' +
+            '<p class="cite">Reply with the missing word and I&rsquo;ll check it.</p>' + cite(m);
+        }
+
+        function lookupHtml(m, question) {
+          var q = tokensOf(question);
+          var sents = sentencesOf(m.text);
+
+          if (!q.length) {
+            return '<p>Try a question with a few key words from the material — for example a term you want explained.</p>' +
+              cite(m);
+          }
+
+          var scored = sents.map(function (s, i) {
+            var low = s.toLowerCase();
+            var score = 0;
+            q.forEach(function (t) { if (low.indexOf(t) !== -1) score++; });
+            return { s: s, i: i, score: score };
+          });
+
+          var hits = scored
+            .filter(function (x) { return x.score > 0; })
+            .sort(function (a, b) { return b.score - a.score || a.i - b.i; })
+            .slice(0, 3)
+            .sort(function (a, b) { return a.i - b.i; });
+
+          if (!hits.length) {
+            var freq = {};
+            sents.forEach(function (s) {
+              tokensOf(s).forEach(function (t) { freq[t] = (freq[t] || 0) + 1; });
+            });
+
+            var keys = Object.keys(freq)
+              .sort(function (a, b) { return freq[b] - freq[a]; })
+              .slice(0, 6);
+
+            return '<p>I couldn&rsquo;t find that in &ldquo;' + esc(m.title) + '&rdquo;.</p>' +
+              (keys.length
+                ? '<p>This material covers things like ' +
+                keys.map(function (k) { return '<strong>' + esc(k) + '</strong>'; }).join(', ') +
+                '. Try one of those words, or ask me to summarise it.</p>'
+                : '<p>It&rsquo;s a short note, so try asking for a summary.</p>') +
+              cite(m);
+          }
+
+          var answer = hits.map(function (x) {
+            return boldTokens(esc(x.s), q);
+          }).join(' ');
+
+          return '<p>' + answer + '</p>' + cite(m);
+        }
+
+        function answerHtml(question) {
+          var m = currentMaterial();
+
+          if (!m) return '<p>Pick a material first.</p>';
+
+          var text = (m.text || '').trim();
+
+          if (!text) {
+            return '<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
+              ', so there is no readable text for me to quote yet.</p>' +
+              '<p>Text extraction for PDFs, Word documents and images opens once a backend is connected. ' +
+              'Pick a text material in this course to use the chat.</p>';
+          }
+
+          if (pendingQuiz) {
+            var quiz = pendingQuiz;
+            pendingQuiz = null;
+
+            if (normalize(question) === normalize(quiz.word)) {
+              return '<p><strong>Correct.</strong> The missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
+                '<p>' + esc(quiz.sentence) + '</p>' + cite(m);
+            }
+
+            return '<p>Close — the missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
               '<p>' + esc(quiz.sentence) + '</p>' + cite(m);
           }
 
-          return '<p>Close — the missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
-            '<p>' + esc(quiz.sentence) + '</p>' + cite(m);
+          var lower = question.toLowerCase();
+
+          if (/summar/.test(lower)) return summaryHtml(m);
+          if (/flashcard|flash card/.test(lower)) return flashcardHtml(m);
+          if (/\bquiz\b|test me|ask me a question/.test(lower)) return quizHtml(m);
+
+          return lookupHtml(m, question);
         }
 
-        var lower = question.toLowerCase();
+        /* =========================================================
+           SENDING
+           ========================================================= */
+        function ask(question) {
+          var text = String(question || '').trim();
+          if (!text || busy || !currentMaterial()) return;
 
-        if (/summar/.test(lower)) return summaryHtml(m);
-        if (/flashcard|flash card/.test(lower)) return flashcardHtml(m);
-        if (/\bquiz\b|test me|ask me a question/.test(lower)) return quizHtml(m);
-
-        return lookupHtml(m, question);
-      }
-
-      /* =========================================================
-         SENDING
-         ========================================================= */
-      function ask(question) {
-        var text = String(question || '').trim();
-        if (!text || busy || !currentMaterial()) return;
-
-        addUser(text);
-        input.value = '';
-        setBusy(true);
-        scrollDown();
-
-        var thinking = addAi('Reading your material\u2026', true);
-        scrollDown();
-
-        window.setTimeout(function () {
-          if (thinking.parentNode) thinking.parentNode.removeChild(thinking);
-          addAi(answerHtml(text));
-          setBusy(false);
+          addUser(text);
+          input.value = '';
+          setBusy(true);
           scrollDown();
-          if (!input.disabled) input.focus();
-        }, 550);
-      }
 
-      composer.addEventListener('submit', function (e) {
-        e.preventDefault();
-        ask(input.value);
-      });
+          var thinking = addAi('Reading your material\u2026', true);
+          scrollDown();
 
-      chips.addEventListener('click', function (e) {
-        var chip = e.target.closest('.chip');
-        if (!chip || chip.disabled) return;
-        ask(chip.dataset.q || chip.textContent);
-      });
-
-      input.addEventListener('input', function () {
-        if (!busy) sendBtn.disabled = !input.value.trim() || input.disabled;
-      });
-
-      /* =========================================================
-         MOBILE MENU
-         ========================================================= */
-      var menuBtn = document.getElementById('menuBtn');
-      var navList = document.getElementById('navList');
-
-      function setMenu(open) {
-        navList.classList.toggle('open', open);
-        menuBtn.setAttribute('aria-expanded', open);
-        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      }
-
-      menuBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setMenu(!navList.classList.contains('open'));
-      });
-
-      navList.addEventListener('click', function (e) {
-        if (e.target.closest('a')) setMenu(false);
-      });
-
-      document.addEventListener('click', function (e) {
-        if (!navList.contains(e.target) && e.target !== menuBtn) setMenu(false);
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setMenu(false);
-      });
-
-      if (window.matchMedia) {
-        var mq = window.matchMedia('(min-width: 860px)');
-        var onMq = function (e) { if (e.matches) setMenu(false); };
-        if (mq.addEventListener) mq.addEventListener('change', onMq);
-        else if (mq.addListener) mq.addListener(onMq);
-      }
-
-      /* =========================================================
-         HEADER SHADOW ON SCROLL
-         ========================================================= */
-      var header = document.getElementById('mainHeader');
-      window.addEventListener('scroll', function () {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-      }, { passive: true });
-
-      /* =========================================================
-         SCROLL REVEAL
-         ========================================================= */
-      var items = document.querySelectorAll('.fade-in');
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) {
-              en.target.classList.add('in');
-              io.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.1 });
-
-        items.forEach(function (el, i) {
-          el.style.transitionDelay = (i % 4) * 70 + 'ms';
-          io.observe(el);
-        });
-      } else {
-        items.forEach(function (el) { el.classList.add('in'); });
-      }
-
-      /* =========================================================
-         BOOT
-         ========================================================= */
-      if (!courses.length) {
-        courseInput.value = '';
-        courseInput.placeholder = 'No courses available';
-        courseInput.disabled = true;
-        matInput.value = '';
-        matInput.placeholder = 'Select a course first';
-        matInput.disabled = true;
-        syncDocChip();
-        resetChat();
-      } else {
-        activeCourseId = courses[0].id;
-        courseInput.value = courses[0].name;
-        
-        var initialMats = courseMaterials(activeCourseId);
-        if (initialMats.length) {
-          activeMaterialId = initialMats[0].id;
-          matInput.value = initialMats[0].title;
+          window.setTimeout(function () {
+            if (thinking.parentNode) thinking.parentNode.removeChild(thinking);
+            addAi(answerHtml(text));
+            setBusy(false);
+            scrollDown();
+            if (!input.disabled) input.focus();
+          }, 550);
         }
-        
-        renderCourseList();
-        renderMaterialList();
-        syncDocChip();
-        resetChat();
-      }
 
-      /* Select text on focus for easy overwriting */
-      courseInput.addEventListener('focus', function() { this.select(); });
-      matInput.addEventListener('focus', function() { this.select(); });
-    })();
+        composer.addEventListener('submit', function (e) {
+          e.preventDefault();
+          ask(input.value);
+        });
+
+        chips.addEventListener('click', function (e) {
+          var chip = e.target.closest('.chip');
+          if (!chip || chip.disabled) return;
+          ask(chip.dataset.q || chip.textContent);
+        });
+
+        input.addEventListener('input', function () {
+          if (!busy) sendBtn.disabled = !input.value.trim() || input.disabled;
+        });
+
+        /* =========================================================
+           MOBILE MENU
+           ========================================================= */
+        var menuBtn = document.getElementById('menuBtn');
+        var navList = document.getElementById('navList');
+
+        function setMenu(open) {
+          navList.classList.toggle('open', open);
+          menuBtn.setAttribute('aria-expanded', open);
+          menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+
+        menuBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          setMenu(!navList.classList.contains('open'));
+        });
+
+        navList.addEventListener('click', function (e) {
+          if (e.target.closest('a')) setMenu(false);
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!navList.contains(e.target) && e.target !== menuBtn) setMenu(false);
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') setMenu(false);
+        });
+
+        if (window.matchMedia) {
+          var mq = window.matchMedia('(min-width: 860px)');
+          var onMq = function (e) { if (e.matches) setMenu(false); };
+          if (mq.addEventListener) mq.addEventListener('change', onMq);
+          else if (mq.addListener) mq.addListener(onMq);
+        }
+
+        /* =========================================================
+           HEADER SHADOW ON SCROLL
+           ========================================================= */
+        var header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        /* =========================================================
+           SCROLL REVEAL
+           ========================================================= */
+        var items = document.querySelectorAll('.fade-in');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) {
+                en.target.classList.add('in');
+                io.unobserve(en.target);
+              }
+            });
+          }, { threshold: 0.1 });
+
+          items.forEach(function (el, i) {
+            el.style.transitionDelay = (i % 4) * 70 + 'ms';
+            io.observe(el);
+          });
+        } else {
+          items.forEach(function (el) { el.classList.add('in'); });
+        }
+
+        /* =========================================================
+           BOOT
+           ========================================================= */
+        if (!courses.length) {
+          courseInput.value = '';
+          courseInput.placeholder = 'No courses available';
+          courseInput.disabled = true;
+          matInput.value = '';
+          matInput.placeholder = 'Select a course first';
+          matInput.disabled = true;
+          syncDocChip();
+          resetChat();
+        } else {
+          activeCourseId = courses[0].id;
+          courseInput.value = courses[0].name;
+
+          var initialMats = courseMaterials(activeCourseId);
+          if (initialMats.length) {
+            activeMaterialId = initialMats[0].id;
+            matInput.value = initialMats[0].title;
+          }
+
+          renderCourseList();
+          renderMaterialList();
+          syncDocChip();
+          resetChat();
+        }
+
+        /* Select text on focus for easy overwriting */
+        courseInput.addEventListener('focus', function () { this.select(); });
+        matInput.addEventListener('focus', function () { this.select(); });
+      })();
   </script>
 </body>
 
