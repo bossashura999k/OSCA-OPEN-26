@@ -573,10 +573,18 @@
       margin-top: var(--space-1);
     }
 
+    .mat-actions {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
     .mat .btn {
       min-height: 2.4rem;
       padding: .45rem 1rem;
       font-size: .9rem;
+      white-space: nowrap;
     }
 
     .empty {
@@ -1123,7 +1131,7 @@
   <header id="mainHeader">
     <div class="wrap">
       <nav aria-label="Main">
-        <a class="logo" href="courses.html">
+        <a class="logo" href="../">
           <span class="mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -1141,10 +1149,10 @@
           </svg>
         </button>
         <ul id="navList">
-          <li><a href="courses.html">Courses</a></li>
+          <li><a href="../">Courses</a></li>
           <li><a href="#top" aria-current="page">Materials</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a class="btn" href="courses.html">Back to courses</a></li>
+          <li><a class="btn" href="../">Back to courses</a></li>
         </ul>
       </nav>
     </div>
@@ -1162,7 +1170,7 @@
         <p class="switcher-label" id="switcherLabel">Course</p>
         <div class="course-toggle" id="courseToggle" role="radiogroup" aria-labelledby="switcherLabel"></div>
         <p class="switcher-note" id="switcherNote" hidden>
-          You don&rsquo;t have any courses yet. <a href="courses.html">Add a course</a> first, then come back here to
+          You don&rsquo;t have any courses yet. <a href="../">Add a course</a> first, then come back here to
           upload its material.
         </p>
       </div>
@@ -1270,7 +1278,7 @@
         <div>
           <h3>Quick links</h3>
           <ul>
-            <li><a href="courses.html">Courses</a></li>
+            <li><a href="../">Courses</a></li>
             <li><a href="#top">Materials</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -1594,16 +1602,29 @@
         body.appendChild(title);
         body.appendChild(meta);
 
-        var view = document.createElement('button');
-        view.type = 'button';
-        view.className = 'btn ghost';
-        view.textContent = 'View';
-        view.setAttribute('aria-label', 'View ' + m.title);
-        view.addEventListener('click', function () { openView(m.id); });
+        var actions = document.createElement('div');
+        actions.className = 'mat-actions';
+
+        var viewBtn = document.createElement('button');
+        viewBtn.type = 'button';
+        viewBtn.className = 'btn ghost';
+        viewBtn.textContent = 'View';
+        viewBtn.setAttribute('aria-label', 'View ' + m.title);
+        viewBtn.addEventListener('click', function () { openView(m.id); });
+
+        var askBtn = document.createElement('a');
+        // Use relative path to ask page, passing course and material IDs
+        askBtn.href = '../ask/?courseId=' + encodeURIComponent(m.courseId) + '&materialId=' + encodeURIComponent(m.id);
+        askBtn.className = 'btn';
+        askBtn.textContent = 'Ask';
+        askBtn.setAttribute('aria-label', 'Ask questions about ' + m.title);
+
+        actions.appendChild(viewBtn);
+        actions.appendChild(askBtn);
 
         row.appendChild(badge);
         row.appendChild(body);
-        row.appendChild(view);
+        row.appendChild(actions);
 
         return row;
       }

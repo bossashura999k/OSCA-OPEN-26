@@ -530,10 +530,20 @@
       font-size: .95rem;
     }
 
-    /* study button sits at the bottom of every card */
-    .study-btn {
+    /* actions row sits at the bottom of every card */
+    .course-actions {
+      display: flex;
+      gap: var(--space-2);
       margin-top: auto;
-      width: 100%;
+      padding-top: var(--space-3);
+    }
+
+    .course-actions .btn {
+      flex: 1;
+      padding: .5rem .5rem;
+      font-size: .85rem;
+      min-height: 2.5rem;
+      white-space: nowrap;
     }
 
     /* =========================================================
@@ -1139,15 +1149,27 @@
         desc.className = 'course-desc';
         desc.textContent = course.description || 'No description yet.';
 
-        var study = document.createElement('button');
-        study.type = 'button';
-        study.className = 'btn study-btn';
-        study.textContent = 'Study';
-        study.setAttribute('aria-label', 'Study ' + course.name);
+        var actions = document.createElement('div');
+        actions.className = 'course-actions';
+
+        var uploadBtn = document.createElement('a');
+        uploadBtn.href = './upload';
+        uploadBtn.className = 'btn ghost';
+        uploadBtn.textContent = 'Upload materials';
+        uploadBtn.setAttribute('aria-label', 'Upload materials for ' + course.name);
+
+        var askBtn = document.createElement('a');
+        askBtn.href = './ask';
+        askBtn.className = 'btn';
+        askBtn.textContent = 'Ask Questions';
+        askBtn.setAttribute('aria-label', 'Ask questions about ' + course.name);
+
+        actions.appendChild(uploadBtn);
+        actions.appendChild(askBtn);
 
         card.appendChild(name);
         card.appendChild(desc);
-        card.appendChild(study);
+        card.appendChild(actions);
 
         return card;
       }
