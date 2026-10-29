@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Courses — Ashura Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#10221a; --muted:#52645a; --paper:#fbfaf5; --sheet:#ffffff;
+  --line:#dfe5df; --green:#0d5c3a; --green-d:#08402a; --pencil:#f4c430;
+  --ok:#0d7a44; --bad:#b3261e;
+  --ok-tint:rgba(13,122,68,.1); --bad-tint:rgba(179,38,30,.08);
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:14px; --radius-sm:10px; --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(16,34,26,.06);
+  --shadow:0 4px 16px rgba(16,34,26,.06);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#eef3ee;--muted:#a3b3a9;--paper:#0d1a13;--sheet:#142419;--line:#1f3326;
+  --green:#4fbb8a;--green-d:#3aa577;--ok:#4fbb8a;--bad:#ff8b85;
+}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);
+  font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:10;
+  background:color-mix(in srgb,var(--paper) 94%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:0 auto;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:700;font-size:1.1rem;color:var(--ink);
+  display:flex;align-items:center;gap:8px}
+.brand-dot{color:var(--pencil);font-size:1.4rem}
+.nav-link{color:var(--muted);font-weight:500}
+.nav-link:hover{color:var(--green);text-decoration:none}
+main{max-width:1120px;margin:0 auto;padding:48px 24px 96px}
+.hero h1{font-size:clamp(1.75rem,1.2rem + 2vw,2.5rem);margin:0 0 8px;letter-spacing:-.02em}
+.hero p{color:var(--muted);margin:0 0 32px;font-size:1.05rem}
+.toolbar{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;border-radius:var(--radius-sm);
+  border:1px solid var(--green);background:var(--green);color:#fff;
+  font-weight:600;font-size:.95rem;transition:background .15s,transform .05s}
+.btn:hover{background:var(--green-d)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:var(--sheet);border-color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow-sm);
+  transition:box-shadow .15s,transform .1s,border-color .15s;
+  display:flex;flex-direction:column;min-height:160px;
+  text-decoration:none;color:inherit}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-1px);
+  border-color:var(--green);text-decoration:none}
+.card h3{margin:0 0 6px;font-size:1.15rem;font-weight:600;color:var(--ink)}
+.card p{margin:0 0 16px;color:var(--muted);font-size:.92rem;flex:1}
+.card .meta{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+.card .meta-dot{color:var(--pencil)}
+.empty,.error{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty h3,.error h3{color:var(--ink);margin:0 0 8px}
+.error{background:var(--bad-tint);
+  border:1px solid color-mix(in srgb,var(--bad) 25%,transparent);
+  border-radius:var(--radius);color:var(--bad)}
+.error h3{color:var(--bad)}
+.skeleton{background:var(--sheet);border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px;height:160px;
+  animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.modal-bg{position:fixed;inset:0;background:rgba(16,34,26,.4);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;z-index:50;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:var(--sheet);border-radius:var(--radius-lg);
+  max-width:480px;width:100%;padding:28px;
+  box-shadow:0 20px 60px rgba(16,34,26,.25)}
+.modal h2{margin:0 0 6px;font-size:1.4rem}
+.modal .sub{color:var(--muted);margin:0 0 20px;font-size:.92rem}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:500;font-size:.88rem;
+  margin-bottom:6px;color:var(--ink)}
+.field input,.field textarea{width:100%;padding:11px 13px;
+  font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--green);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 15%,transparent)}
+.field textarea{resize:vertical;min-height:80px}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+.form-error{color:var(--bad);font-size:.88rem;margin:8px 0 0;
+  padding:8px 12px;background:var(--bad-tint);border-radius:var(--radius-sm)}
+</style>
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a class="brand" href="../index.html"><span class="brand-dot">●</span>Ashura Study</a>
+    <a class="nav-link" href="../index.html">← Back to home</a>
+  </nav>
+</header>
+<main>
+  <div class="hero">
+    <h1>Your courses</h1>
+    <p>Each course keeps its own material. Ask questions and answers stay grounded in what you pasted.</p>
+  </div>
+  <div class="toolbar">
+    <span id="count" style="color:var(--muted);font-size:.95rem"></span>
+    <button class="btn" id="newBtn">+ New course</button>
+  </div>
+  <div id="content"></div>
+</main>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h2>New course</h2>
+    <p class="sub">Give it a name. You can paste material next.</p>
+    <form id="courseForm">
+      <div class="field">
+        <label for="name">Course name</label>
+        <input id="name" type="text" required placeholder="e.g. CHEM 101" maxlength="120">
+      </div>
+      <div class="field">
+        <label for="description">Description <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+        <textarea id="description" placeholder="What's this course about?" maxlength="500"></textarea>
+      </div>
+      <div id="formError"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+        <button type="submit" class="btn" id="submitBtn">Create course</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const API='http://localhost:6691';
+const $=s=>document.querySelector(s);
+const content=$('#content'),countEl=$('#count'),modal=$('#modal');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadCourses(){
+  content.innerHTML='<div class="grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>';
+  try{
+    const res=await fetch(`${API}/courses`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    renderCourses(await res.json());
+  }catch(err){
+    content.innerHTML=`<div class="error"><h3>Can't reach the API</h3>
+      <p>Make sure the server is running on <code>${API}</code> — <code>cd api && npm start</code></p>
+      <p style="font-size:.82rem;opacity:.7;margin-top:12px">${esc(err.message)}</p></div>`;
+    countEl.textContent='';
+  }
+}
+function renderCourses(courses){
+  if(!courses.length){
+    countEl.textContent='';
+    content.innerHTML=`<div class="empty"><h3>No courses yet</h3>
+      <p>Create your first course to get started.</p>
+      <button class="btn" onclick="document.getElementById('newBtn').click()" style="margin-top:8px">+ New course</button></div>`;
+    return;
+  }
+  countEl.textContent=`${courses.length} course${courses.length===1?'':'s'}`;
+  content.innerHTML=`<div class="grid">${courses.map(c=>`
+    <a class="card" href="./course/?id=${encodeURIComponent(c.id)}">
+      <h3>${esc(c.name)}</h3>
+      <p>${c.description?esc(c.description):'<em style="opacity:.6">No description</em>'}</p>
+      <div class="meta"><span class="meta-dot">●</span>
+        ${c.materials.length} material${c.materials.length===1?'':'s'} pasted
+      </div>
+    </a>`).join('')}</div>`;
+}
+function openModal(){modal.classList.add('open');$('#formError').innerHTML='';
+  $('#courseForm').reset();setTimeout(()=>$('#name').focus(),50);}
+function closeModal(){modal.classList.remove('open');}
+$('#newBtn').addEventListener('click',openModal);
+$('#cancelBtn').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+$('#courseForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=$('#name').value.trim();
+  const description=$('#description').value.trim();
+  const errEl=$('#formError'),submitBtn=$('#submitBtn');
+  errEl.innerHTML='';
+  if(!name){errEl.innerHTML='<div class="form-error">Course name is required.</div>';return;}
+  submitBtn.disabled=true;submitBtn.textContent='Creating…';
+  try{
+    const res=await fetch(`${API}/courses`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,description:description||undefined})
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    closeModal();await loadCourses();
+  }catch(err){
+    errEl.innerHTML=`<div class="form-error">Couldn't create course: ${esc(err.message)}</div>`;
+  }finally{
+    submitBtn.disabled=false;submitBtn.textContent='Create course';
+  }
+});
+loadCourses();
+</script>
+</body>
+</html>
