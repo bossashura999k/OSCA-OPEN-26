@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>document.documentElement.className = "js"</script>
+
+  <title>Materials | Ashura Study</title>
+  <meta name="description"
+    content="Upload and browse the material for each Ashura Study course — text notes, PDFs, Word documents and images.">
+  <meta name="robots" content="index, follow">
+
+  <meta name="theme-color" content="#0d5c3a" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1a13" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       DESIGN TOKENS
+       Every colour, size, space, radius and shadow lives here.
+       (CSS variables can't be used inside @media conditions,
+        so the two breakpoints are noted as comments instead:
+        --bp-nav: 860px   --bp-sm: 600px)
+       ========================================================= */
+    :root {
+      /* colour */
+      --ink: #10221a;
+      --muted: #52645a;
+      --paper: #fbfaf5;
+      --sheet: #ffffff;
+      --line: #dfe5df;
+      --green: #0d5c3a;
+      --green-d: #08402a;
+      --pencil: #f4c430;
+      --ok: #0d7a44;
+      --bad: #b3261e;
+
+      /* buttons + final banner (kept separate so dark mode keeps white-text contrast) */
+      --btn: #0d5c3a;
+      --btn-hover: #08402a;
+      --on-btn: #ffffff;
+      --final-bg: #0d5c3a;
+      --on-final: #ffffff;
+      --on-pencil: #10221a;
+      --pencil-hover: #ffd75a;
+
+      /* tinted states */
+      --ok-tint: rgba(13, 122, 68, .1);
+      --bad-tint: rgba(179, 38, 30, .08);
+      --header-bg: color-mix(in srgb, var(--paper) 94%, transparent);
+
+      /* typography (fluid) */
+      --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fs-base: clamp(1rem, .96rem + .2vw, 1.0625rem);
+      --fs-sm: .9rem;
+      --fs-xs: .85rem;
+      --fs-lead: clamp(1.05rem, 1rem + .3vw, 1.2rem);
+      --fs-h1: clamp(2rem, 1.25rem + 3.6vw, 3.6rem);
+      --fs-h2: clamp(1.5rem, 1.15rem + 1.8vw, 2.2rem);
+      --fs-h3: clamp(1.05rem, 1rem + .25vw, 1.15rem);
+      --lh-body: 1.6;
+      --lh-tight: 1.1;
+
+      /* spacing scale */
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4.5rem;
+      --section-y: clamp(3rem, 2rem + 4vw, 4.5rem);
+      --gutter: clamp(1rem, .6rem + 2vw, 1.5rem);
+
+      /* layout */
+      --container: 1080px;
+      --header-h: 3.5rem;
+      --logo-size: 2.5rem;
+      --tap: 2.75rem;
+      /* minimum touch target (44px) */
+      --measure: 46ch;
+
+      /* shape */
+      --radius-sm: .5rem;
+      --radius-md: .75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.25rem;
+      --radius-pill: 999px;
+
+      /* depth + motion */
+      --shadow-card: 0 18px 40px -24px rgba(8, 64, 42, .45);
+      --shadow-header: 0 6px 20px -12px rgba(8, 64, 42, .5);
+      --shadow-menu: 0 14px 24px -14px rgba(8, 64, 42, .4);
+      --shadow-pop: 0 14px 40px -12px rgba(0, 0, 0, .35);
+      --ease: .15s ease;
+      --ease-slow: .5s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #eef3ee;
+        --muted: #a3b3a9;
+        --paper: #0d1a13;
+        --sheet: #14261c;
+        --line: #26402f;
+        --green: #2fa36b;
+        --green-d: #53c78e;
+        --btn: #1f8a58;
+        --btn-hover: #2fa36b;
+        --final-bg: #14573a;
+        --ok: #3fbf83;
+        --bad: #ff8a80;
+        --ok-tint: rgba(63, 191, 131, .14);
+        --bad-tint: rgba(255, 138, 128, .12);
+        --shadow-card: 0 18px 40px -24px rgba(0, 0, 0, .8);
+        --shadow-header: 0 6px 20px -12px rgba(0, 0, 0, .8);
+        --shadow-menu: 0 14px 24px -14px rgba(0, 0, 0, .8);
+        --shadow-pop: 0 14px 40px -12px rgba(0, 0, 0, .8);
+      }
+    }
+
+    /* roomier container on big screens */
+    @media (min-width: 1200px) {
+      :root {
+        --container: 1160px;
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    @media (min-width: 860px) {
+      :root {
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    /* =========================================================
+       BASE
+       ========================================================= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + var(--space-2));
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: var(--lh-body);
+      font-size: var(--fs-base);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 3px;
+    }
+
+    .btn,
+    .toggle,
+    .format,
+    .drop,
+    .menu-btn,
+    .dlg-x {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
+    }
+
+    /* =========================================================
+       HEADER + NAV  (mobile first)
+       ========================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding-top: env(safe-area-inset-top, 0px);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      background: var(--header-bg);
+      transition: box-shadow var(--ease);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-header);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-h);
+      gap: var(--space-4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      min-height: var(--tap);
+    }
+
+    .logo .mark {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: var(--logo-size);
+      height: var(--logo-size);
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--on-btn);
+    }
+
+    .logo .mark svg {
+      width: 58%;
+      height: 58%;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--tap);
+      height: var(--tap);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-btn svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    .menu-btn path {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform var(--ease), opacity var(--ease);
+    }
+
+    .menu-btn[aria-expanded="true"] .l1 {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    .menu-btn[aria-expanded="true"] .l2 {
+      opacity: 0;
+    }
+
+    .menu-btn[aria-expanded="true"] .l3 {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    /* mobile dropdown panel: spans the full header width */
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      list-style: none;
+      padding: var(--space-2) max(var(--gutter), env(safe-area-inset-right, 0px)) var(--space-4) max(var(--gutter), env(safe-area-inset-left, 0px));
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-menu);
+      max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px));
+      overflow-y: auto;
+    }
+
+    nav ul.open {
+      display: flex;
+    }
+
+    nav ul a {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+      padding: var(--space-2) var(--space-1);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    nav ul a[aria-current="page"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav ul li:last-child {
+      margin-top: var(--space-2);
+    }
+
+    nav ul li:last-child .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap);
+      padding: .65rem 1.5rem;
+      background: var(--btn);
+      color: var(--on-btn);
+      font: 600 1rem/1.2 var(--font);
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid var(--btn);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--ease), border-color var(--ease), opacity var(--ease);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .btn[disabled] {
+      opacity: .55;
+      cursor: default;
+    }
+
+    /* =========================================================
+       PAGE HEAD
+       ========================================================= */
+    .page-head {
+      padding-block: var(--space-6) var(--space-5);
+    }
+
+    h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-tight);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: var(--fs-lead);
+      margin-top: var(--space-4);
+      max-width: var(--measure);
+    }
+
+    /* =========================================================
+       COURSE TOGGLE
+       ========================================================= */
+    .switcher {
+      margin-bottom: var(--space-5);
+    }
+
+    .switcher-label {
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .course-toggle {
+      display: flex;
+      gap: var(--space-2);
+      overflow-x: auto;
+      padding-bottom: var(--space-2);
+      scrollbar-width: thin;
+    }
+
+    .toggle {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      padding: .55rem 1.1rem;
+      font: 600 .95rem/1.2 var(--font);
+      color: var(--ink);
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--ease), border-color var(--ease), color var(--ease);
+    }
+
+    .toggle[aria-checked="true"] {
+      background: var(--btn);
+      border-color: var(--btn);
+      color: var(--on-btn);
+    }
+
+    .switcher-note {
+      font-size: var(--fs-sm);
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .switcher-note a {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       LAYOUT
+       ========================================================= */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+      padding-bottom: var(--section-y);
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.25;
+    }
+
+    /* =========================================================
+       MATERIALS LIST
+       ========================================================= */
+    .materials-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .count {
+      font-size: var(--fs-sm);
+      color: var(--muted);
+      flex: none;
+    }
+
+    .mat-grid {
+      display: grid;
+      gap: var(--space-3);
+      list-style: none;
+      padding: 0;
+    }
+
+    .mat {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-3);
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-card);
+    }
+
+    .mat.is-new {
+      animation: mat-in .45s ease both;
+    }
+
+    @keyframes mat-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+        border-color: var(--green);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .mat-badge {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: var(--radius-md);
+      background: var(--ok-tint);
+      color: var(--ok);
+      font-size: .64rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .mat-body {
+      min-width: 0;
+    }
+
+    .mat-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .mat-meta {
+      color: var(--muted);
+      font-size: var(--fs-xs);
+      margin-top: var(--space-1);
+    }
+
+    .mat .btn {
+      min-height: 2.4rem;
+      padding: .45rem 1rem;
+      font-size: .9rem;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-7) var(--space-4);
+      font-size: .98rem;
+    }
+
+    .empty[hidden] {
+      display: none;
+    }
+
+    /* =========================================================
+       UPLOAD PANEL
+       ========================================================= */
+    .upload {
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-card);
+    }
+
+    .upload .panel-title {
+      margin-bottom: var(--space-4);
+    }
+
+    .field {
+      display: grid;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .field-label {
+      font-weight: 600;
+      font-size: var(--fs-sm);
+    }
+    #fileField{
+      display: none;
+    }
+
+    .input {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: .7rem .85rem;
+      min-height: var(--tap);
+      transition: border-color var(--ease);
+    }
+
+    .input::placeholder {
+      color: var(--muted);
+      opacity: .8;
+    }
+
+    .input:focus {
+      border-color: var(--green);
+    }
+
+    .input:focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 2px;
+    }
+
+    textarea.input {
+      min-height: 7rem;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    /* format picker */
+    .formats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-2);
+    }
+
+    .format {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-height: var(--tap);
+      padding: .55rem .7rem;
+      font: 600 .9rem/1.2 var(--font);
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color var(--ease), background var(--ease);
+    }
+
+    .format svg {
+      width: 1.15rem;
+      height: 1.15rem;
+      flex: none;
+      color: var(--muted);
+      transition: color var(--ease);
+    }
+
+    .format[aria-checked="true"] {
+      border-color: var(--green);
+      background: var(--ok-tint);
+    }
+
+    .format[aria-checked="true"] svg {
+      color: var(--green);
+    }
+
+    /* disabled formats: visible but not selectable */
+    .format[disabled] {
+      opacity: .45;
+      cursor: default;
+      background: var(--paper);
+      border-color: var(--line);
+    }
+
+    .format[disabled] svg {
+      color: var(--muted);
+    }
+
+    /* drop zone */
+    .drop {
+      display: grid;
+      justify-items: center;
+      gap: var(--space-1);
+      text-align: center;
+      padding: var(--space-5) var(--space-4);
+      border: 2px dashed var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      cursor: pointer;
+      transition: border-color var(--ease), background var(--ease);
+    }
+
+    .drop.is-drag {
+      border-color: var(--green);
+      background: var(--ok-tint);
+    }
+
+    .drop.has-file {
+      border-style: solid;
+      border-color: var(--green);
+      background: var(--ok-tint);
+    }
+
+    .drop-ico {
+      color: var(--muted);
+      line-height: 0;
+    }
+
+    .drop.has-file .drop-ico {
+      color: var(--green);
+    }
+
+    .drop-title {
+      font-weight: 600;
+      font-size: .95rem;
+      overflow-wrap: anywhere;
+    }
+
+    .drop-hint {
+      font-size: var(--fs-xs);
+      color: var(--muted);
+    }
+
+    .upload .btn {
+      width: 100%;
+    }
+
+    .err {
+      color: var(--bad);
+      background: var(--bad-tint);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--fs-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .err[hidden] {
+      display: none;
+    }
+
+    .status {
+      font-size: var(--fs-sm);
+      color: var(--ok);
+      margin-top: var(--space-3);
+      min-height: 1.2em;
+    }
+
+    /* =========================================================
+       DIALOG
+       ========================================================= */
+    dialog.modal {
+      width: min(34rem, calc(100% - 2rem));
+      max-height: calc(100dvh - 2rem);
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--sheet);
+      color: var(--ink);
+      box-shadow: var(--shadow-pop);
+      overflow: auto;
+    }
+
+    dialog.modal::backdrop {
+      background: rgba(8, 64, 42, .45);
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      dialog.modal::backdrop {
+        background: rgba(0, 0, 0, .65);
+      }
+    }
+
+    .dlg-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-5) var(--space-5) var(--space-2);
+    }
+
+    .dlg-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .dlg-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: var(--tap);
+      height: var(--tap);
+      margin-right: calc(var(--space-2) * -1);
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-md);
+      color: var(--muted);
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+
+    .dlg-body {
+      padding: var(--space-1) var(--space-5) var(--space-4);
+    }
+
+    .dlg-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: flex-end;
+      padding: var(--space-4) var(--space-5) var(--space-5);
+      border-top: 1px solid var(--line);
+    }
+
+    .dlg-foot .btn {
+      flex: 1 1 auto;
+    }
+
+    .view-meta {
+      color: var(--muted);
+      font-size: var(--fs-xs);
+      margin-bottom: var(--space-3);
+    }
+
+    .preview-text {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: .95rem;
+      line-height: 1.55;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      max-height: 45vh;
+      overflow: auto;
+    }
+
+    .preview-img {
+      width: 100%;
+      max-height: 45vh;
+      object-fit: contain;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+    }
+
+    .preview-note {
+      font-size: var(--fs-sm);
+      color: var(--muted);
+      background: var(--paper);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: var(--space-7) 0 calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .fcols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+    }
+
+    .fcols h3 {
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .fcols ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .fcols li {
+      margin-bottom: var(--space-1);
+    }
+
+    .fcols a {
+      display: inline-block;
+      padding-block: .2rem;
+      text-decoration: none;
+    }
+
+    .fbrand p {
+      max-width: 34ch;
+      margin-top: var(--space-2);
+    }
+
+    .fbottom {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      font-size: var(--fs-xs);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL (only when JS is on)
+       ========================================================= */
+    .js .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--ease-slow), transform var(--ease-slow);
+    }
+
+    .js .fade-in.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =========================================================
+       HOVER (only on devices that can hover, so touch never "sticks")
+       ========================================================= */
+    @media (hover: hover) {
+      .btn:hover:not([disabled]) {
+        background: var(--btn-hover);
+        border-color: var(--btn-hover);
+      }
+
+      .btn.ghost:hover:not([disabled]) {
+        background: transparent;
+        border-color: var(--ink);
+      }
+
+      .toggle:hover {
+        border-color: var(--green);
+      }
+
+      .toggle[aria-checked="true"]:hover {
+        border-color: var(--btn-hover);
+        background: var(--btn-hover);
+      }
+
+      .format:hover:not([disabled]) {
+        border-color: var(--green);
+      }
+
+      .drop:hover {
+        border-color: var(--green);
+        background: var(--ok-tint);
+      }
+
+      .dlg-x:hover {
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      nav ul a:hover {
+        color: var(--ink);
+      }
+
+      .fcols a:hover {
+        color: var(--green);
+        text-decoration: underline;
+      }
+    }
+
+    /* =========================================================
+       ≥ 600px  (large phones, small tablets)
+       ========================================================= */
+    @media (min-width: 600px) {
+      .dlg-foot .btn {
+        flex: 0 0 auto;
+      }
+
+      .fcols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fbrand {
+        grid-column: 1 / -1;
+      }
+
+      .fbottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+
+    /* =========================================================
+       ≥ 860px  (tablets landscape, laptops, desktops)
+       ========================================================= */
+    @media (min-width: 860px) {
+      .menu-btn {
+        display: none;
+      }
+
+      nav ul {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-5);
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        max-height: none;
+        overflow: visible;
+      }
+
+      nav ul a {
+        min-height: 0;
+        padding: 0;
+        font-size: .95rem;
+      }
+
+      nav ul li:last-child {
+        margin-top: 0;
+      }
+
+      nav ul li:last-child .btn {
+        width: auto;
+        min-height: 2.5rem;
+        padding: var(--space-2) var(--space-4);
+      }
+
+      .page-head {
+        padding-block: var(--space-8) var(--space-6);
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr) 22rem;
+        gap: var(--space-7);
+        align-items: start;
+      }
+
+      .fcols {
+        grid-template-columns: 1.6fr 1fr 1fr 1fr;
+        gap: var(--space-6);
+      }
+
+      .fbrand {
+        grid-column: auto;
+      }
+    }
+
+    /* keep the upload panel in view on tall screens only */
+    @media (min-width: 860px) and (min-height: 780px) {
+      .upload {
+        position: sticky;
+        top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + var(--space-4));
+      }
+    }
+
+    /* short landscape phones: keep the sticky header from eating the screen */
+    @media (max-height: 480px) and (orientation: landscape) {
+      :root {
+        --header-h: 3rem;
+        --logo-size: 2rem;
+      }
+
+      .page-head {
+        padding-block: var(--space-5) var(--space-4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .js .fade-in {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <header id="mainHeader">
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a class="logo" href="courses.html">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 3l2.2 5.4L19.6 10.6l-5.4 2.2L12 18.2l-2.2-5.4L4.4 10.6l5.4-2.2z" />
+            </svg>
+          </span>
+          Ashura Study
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            aria-hidden="true">
+            <path class="l1" d="M4 7h16" />
+            <path class="l2" d="M4 12h16" />
+            <path class="l3" d="M4 17h16" />
+          </svg>
+        </button>
+        <ul id="navList">
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="#top" aria-current="page">Materials</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="courses.html">Back to courses</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-head">
+      <h1 class="fade-in">Materials</h1>
+      <p class="lead fade-in">Upload what you study from — typed notes, PDFs, Word documents or photos of a page — then
+        ask Ashura about any of it.</p>
+    </div>
+
+    <div class="wrap">
+      <div class="switcher">
+        <p class="switcher-label" id="switcherLabel">Course</p>
+        <div class="course-toggle" id="courseToggle" role="radiogroup" aria-labelledby="switcherLabel"></div>
+        <p class="switcher-note" id="switcherNote" hidden>
+          You don&rsquo;t have any courses yet. <a href="courses.html">Add a course</a> first, then come back here to
+          upload its material.
+        </p>
+      </div>
+    </div>
+
+    <div class="wrap layout">
+      <section class="materials" aria-labelledby="materialsHeading">
+        <div class="materials-head">
+          <h2 class="panel-title" id="materialsHeading">Uploaded material</h2>
+          <p class="count" id="matCount" aria-live="polite">0 materials</p>
+        </div>
+
+        <div class="mat-grid" id="matGrid" role="list"></div>
+        <p class="empty" id="matEmpty" hidden></p>
+      </section>
+
+      <aside class="upload" id="uploadPanel" aria-labelledby="uploadHeading">
+        <h2 class="panel-title" id="uploadHeading">Upload material</h2>
+
+        <form id="uploadForm" novalidate>
+          <div class="field">
+            <span class="field-label" id="formatLabel">Format</span>
+            <div class="formats" id="formats" role="radiogroup" aria-labelledby="formatLabel">
+              <button class="format" type="button" role="radio" aria-checked="true" data-format="text">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  aria-hidden="true">
+                  <path d="M4 6h16M4 12h16M4 18h10" />
+                </svg>
+                Text
+              </button>
+              <button class="format" type="button" role="radio" aria-checked="false" data-format="pdf" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                  <path d="M14 3v5h5" />
+                </svg>
+                PDF
+              </button>
+              <button class="format" type="button" role="radio" aria-checked="false" data-format="doc" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                  <path d="M14 3v5h5" />
+                  <path d="M8.5 13h7M8.5 17h4.5" />
+                </svg>
+                Word doc
+              </button>
+              <button class="format" type="button" role="radio" aria-checked="false" data-format="image" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <circle cx="8.5" cy="9.5" r="1.5" />
+                  <path d="m21 15-4.5-4.5L7 20" />
+                </svg>
+                Image
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="fTitle">Title</label>
+            <input class="input" id="fTitle" name="title" type="text" maxlength="90" autocomplete="off"
+              placeholder="e.g. Lecture 1 — Membrane structure">
+          </div>
+
+          <div class="field" id="textField">
+            <label class="field-label" for="fText">Notes</label>
+            <textarea class="input" id="fText" name="text" rows="6"
+              placeholder="Type or paste your notes here…"></textarea>
+          </div>
+
+          <div class="field" id="fileField" hidden>
+            <span class="field-label">File</span>
+            <input class="visually-hidden" type="file" id="fFile" tabindex="-1" aria-hidden="true">
+            <div class="drop" id="drop" role="button" tabindex="0" aria-describedby="dropHint">
+              <span class="drop-ico" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4" />
+                  <path d="m7 9 5-5 5 5" />
+                  <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+                </svg>
+              </span>
+              <span class="drop-title" id="dropTitle">Choose a file or drop it here</span>
+              <span class="drop-hint" id="dropHint">PDF up to 5 MB</span>
+            </div>
+          </div>
+
+          <p class="err" id="upErr" role="alert" hidden></p>
+
+          <button class="btn" type="submit" id="uploadBtn">Upload material</button>
+          <p class="status" id="upStatus" role="status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="fcols">
+        <div class="fbrand">
+          <h3>Ashura Study</h3>
+          <p>An AI study assistant that answers questions about the material you upload.</p>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="#top">Materials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help centre</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of service</a></li>
+          </ul>
+        </div>
+        <div id="contact">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">Telegram channel</a></li>
+            <li><a href="#">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>&copy; <span id="yr">2026</span> Ashura Study</span>
+        <span>AI can make mistakes — always check the source it cites.</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="viewDialog" aria-labelledby="viewTitle">
+    <div class="dlg-head">
+      <h2 class="dlg-title" id="viewTitle">Material</h2>
+      <button class="dlg-x" type="button" id="viewClose" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="dlg-body">
+      <p class="view-meta" id="viewMeta"></p>
+      <div id="viewBody"></div>
+    </div>
+    <div class="dlg-foot">
+      <!-- <button class="btn ghost" type="button" id="viewRemove">Remove</button> -->
+      <button class="btn" type="button" id="viewDone">Done</button>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================
+         STORAGE KEYS + SEED DATA
+         ========================================================= */
+      var COURSES_KEY = 'ashura.courses.v1';
+      var MAT_KEY = 'ashura.materials.v1';
+      var MAX_BYTES = 5 * 1024 * 1024;        /* 5 MB per file */
+      var PREVIEW_MAX = 250 * 1024;           /* keep image data URLs small */
+
+      var SEED_COURSES = [
+        { id: 'crs_3f9a1b', name: 'Cell Biology', slug: 'cell-biology', description: 'Membranes, organelles, transport and cell division.' },
+        { id: 'crs_7c2e04', name: 'Organic Chemistry', slug: 'organic-chemistry', description: 'Nomenclature, reaction mechanisms and functional groups.' },
+        { id: 'crs_b81d55', name: 'Microeconomics', slug: 'microeconomics', description: 'Demand and supply, elasticity and market structures.' }
+      ];
+
+      var DAY = 86400000;
+      var NOW = Date.now();
+
+      var SEED_MATERIALS = [
+        {
+          id: 'mat_1a2b3c', courseId: 'crs_3f9a1b', format: 'pdf',
+          title: 'Lecture 1 — Membrane structure',
+          fileName: 'BIO201-L1.pdf', size: 1240000, createdAt: NOW - 3 * DAY
+        },
+        {
+          id: 'mat_4d5e6f', courseId: 'crs_3f9a1b', format: 'text',
+          title: 'Quick notes on osmosis',
+          text: 'Osmosis is the movement of water across a partially permeable membrane, from a region of higher water potential to a region of lower water potential.\n\nWater potential is measured in kPa. Pure water has a water potential of 0 kPa. Adding solute lowers the water potential, making it negative.\n\nKey exam point: osmosis is passive — no ATP is used.',
+          createdAt: NOW - 2 * DAY
+        },
+        {
+          id: 'mat_7g8h9i', courseId: 'crs_7c2e04', format: 'doc',
+          title: 'Reaction mechanism summary',
+          fileName: 'mechanisms.docx', size: 320000, createdAt: NOW - DAY
+        },
+        {
+          id: 'mat_0j1k2l', courseId: 'crs_b81d55', format: 'image',
+          title: 'Elasticity diagram from the board',
+          fileName: 'elasticity-board.jpg', size: 890000, createdAt: NOW - 6 * 3600000
+        }
+      ];
+
+      /* =========================================================
+         STORAGE HELPERS
+         ========================================================= */
+      function readJSON(key) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw === null ? null : JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function writeJSON(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      var courses = readJSON(COURSES_KEY);
+      if (!Array.isArray(courses)) {
+        courses = SEED_COURSES.slice();
+        writeJSON(COURSES_KEY, courses);
+      }
+
+      var materials = readJSON(MAT_KEY);
+      if (!Array.isArray(materials)) {
+        materials = SEED_MATERIALS.slice();
+        writeJSON(MAT_KEY, materials);
+      }
+
+      var activeCourseId = courses.length ? courses[0].id : null;
+      var activeFormat = 'text';
+      var pendingFile = null;
+      var highlightId = null;
+
+      /* =========================================================
+         FORMAT DEFINITIONS
+         ========================================================= */
+      var FORMATS = {
+        text: { label: 'Text', badge: 'TXT', hint: 'Type or paste your notes below.' },
+        pdf: { label: 'PDF', badge: 'PDF', hint: 'PDF up to 5 MB', accept: '.pdf,application/pdf' },
+        doc: {
+          label: 'Word document', badge: 'DOC', hint: 'DOC or DOCX up to 5 MB',
+          accept: '.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        },
+        image: { label: 'Image', badge: 'IMG', hint: 'PNG, JPG or GIF up to 5 MB', accept: 'image/*' }
+      };
+
+      /* =========================================================
+         SMALL UTILITIES
+         ========================================================= */
+      function uid(prefix) {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+          return prefix + window.crypto.randomUUID().replace(/-/g, '').slice(0, 8);
+        }
+        return prefix + Math.random().toString(16).slice(2, 10);
+      }
+
+      function formatBytes(bytes) {
+        if (!bytes) return '';
+        var kb = bytes / 1024;
+        if (kb < 1024) return Math.max(1, Math.round(kb)) + ' KB';
+        return (kb / 1024).toFixed(1).replace(/\.0$/, '') + ' MB';
+      }
+
+      function formatDate(ts) {
+        var d = new Date(ts);
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+      }
+
+      function wordCount(text) {
+        var words = String(text || '').trim().split(/\s+/).filter(Boolean);
+        return words.length;
+      }
+
+      function baseName(fileName) {
+        return String(fileName || '').replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim();
+      }
+
+      function fileMatchesFormat(file, format) {
+        var name = (file.name || '').toLowerCase();
+        if (format === 'pdf') return /\.pdf$/.test(name) || file.type === 'application/pdf';
+        if (format === 'doc') return /\.docx?$/.test(name);
+        if (format === 'image') {
+          return /^image\//.test(file.type) || /\.(png|jpe?g|gif|webp|heic|heif|bmp)$/.test(name);
+        }
+        return false;
+      }
+
+      function readAsDataURL(file, done) {
+        var reader = new FileReader();
+        reader.onload = function () { done(String(reader.result || '')); };
+        reader.onerror = function () { done(null); };
+        reader.readAsDataURL(file);
+      }
+
+      /* =========================================================
+         DOM
+         ========================================================= */
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      var toggleBox = document.getElementById('courseToggle');
+      var switcherNote = document.getElementById('switcherNote');
+      var grid = document.getElementById('matGrid');
+      var matEmpty = document.getElementById('matEmpty');
+      var matCount = document.getElementById('matCount');
+
+      var form = document.getElementById('uploadForm');
+      var formatsBox = document.getElementById('formats');
+      var formatButtons = Array.prototype.slice.call(formatsBox.querySelectorAll('.format'));
+      var fTitle = document.getElementById('fTitle');
+      var fText = document.getElementById('fText');
+      var fFile = document.getElementById('fFile');
+      var textField = document.getElementById('textField');
+      var fileField = document.getElementById('fileField');
+      var drop = document.getElementById('drop');
+      var dropTitle = document.getElementById('dropTitle');
+      var dropHint = document.getElementById('dropHint');
+      var uploadBtn = document.getElementById('uploadBtn');
+      var upErr = document.getElementById('upErr');
+      var upStatus = document.getElementById('upStatus');
+
+      var viewDialog = document.getElementById('viewDialog');
+      var viewTitle = document.getElementById('viewTitle');
+      var viewMeta = document.getElementById('viewMeta');
+      var viewBody = document.getElementById('viewBody');
+      // var viewRemove = document.getElementById('viewRemove');
+      var viewingId = null;
+
+      /* =========================================================
+         COURSE TOGGLE
+         ========================================================= */
+      var courseButtons = [];
+
+      function buildToggle() {
+        toggleBox.textContent = '';
+        courseButtons = [];
+
+        if (!courses.length) {
+          switcherNote.hidden = false;
+          uploadBtn.disabled = true;
+          return;
+        }
+
+        switcherNote.hidden = true;
+        uploadBtn.disabled = false;
+
+        courses.forEach(function (course) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'toggle';
+          b.setAttribute('role', 'radio');
+          b.setAttribute('aria-checked', String(course.id === activeCourseId));
+          b.tabIndex = course.id === activeCourseId ? 0 : -1;
+          b.dataset.courseId = course.id;
+          b.textContent = course.name;
+          b.addEventListener('click', function () { setActiveCourse(course.id); });
+          toggleBox.appendChild(b);
+          courseButtons.push(b);
+        });
+      }
+
+      function setActiveCourse(id, moveFocus) {
+        activeCourseId = id;
+        courseButtons.forEach(function (b) {
+          var on = b.dataset.courseId === id;
+          b.setAttribute('aria-checked', String(on));
+          b.tabIndex = on ? 0 : -1;
+          if (on && moveFocus) b.focus();
+        });
+        clearUploadError();
+        upStatus.textContent = '';
+        resetFile();
+        renderMaterials();
+      }
+
+      toggleBox.addEventListener('keydown', function (e) {
+        var keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'];
+        if (keys.indexOf(e.key) === -1 || !courseButtons.length) return;
+
+        var idx = courseButtons.indexOf(document.activeElement);
+        if (idx === -1) return;
+
+        e.preventDefault();
+        var dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+        var next = (idx + dir + courseButtons.length) % courseButtons.length;
+        setActiveCourse(courseButtons[next].dataset.courseId, true);
+      });
+
+      /* =========================================================
+         MATERIALS LIST
+         ========================================================= */
+      function metaLine(m) {
+        var parts = [FORMATS[m.format] ? FORMATS[m.format].label : 'File'];
+
+        if (m.format === 'text') {
+          var w = wordCount(m.text);
+          parts.push(w + (w === 1 ? ' word' : ' words'));
+        } else if (m.size) {
+          parts.push(formatBytes(m.size));
+        }
+
+        parts.push(formatDate(m.createdAt));
+        return parts.join(' \u00B7 ');
+      }
+
+      function makeMaterialCard(m) {
+        var row = document.createElement('article');
+        row.className = 'mat' + (m.id === highlightId ? ' is-new' : '');
+        row.setAttribute('role', 'listitem');
+        row.dataset.id = m.id;
+
+        var badge = document.createElement('span');
+        badge.className = 'mat-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        badge.textContent = FORMATS[m.format] ? FORMATS[m.format].badge : 'FILE';
+
+        var body = document.createElement('div');
+        body.className = 'mat-body';
+
+        var title = document.createElement('h3');
+        title.className = 'mat-title';
+        title.textContent = m.title;
+
+        var meta = document.createElement('p');
+        meta.className = 'mat-meta';
+        meta.textContent = metaLine(m);
+
+        body.appendChild(title);
+        body.appendChild(meta);
+
+        var view = document.createElement('button');
+        view.type = 'button';
+        view.className = 'btn ghost';
+        view.textContent = 'View';
+        view.setAttribute('aria-label', 'View ' + m.title);
+        view.addEventListener('click', function () { openView(m.id); });
+
+        row.appendChild(badge);
+        row.appendChild(body);
+        row.appendChild(view);
+
+        return row;
+      }
+
+      function renderMaterials() {
+        var list = materials
+          .filter(function (m) { return m.courseId === activeCourseId; })
+          .sort(function (a, b) { return b.createdAt - a.createdAt; });
+
+        grid.textContent = '';
+        list.forEach(function (m) { grid.appendChild(makeMaterialCard(m)); });
+
+        matCount.textContent = list.length + (list.length === 1 ? ' material' : ' materials');
+
+        if (list.length === 0) {
+          matEmpty.hidden = false;
+          matEmpty.textContent = courses.length
+            ? 'Nothing uploaded for this course yet — add your first material on the right.'
+            : 'Add a course first, then upload its material.';
+        } else {
+          matEmpty.hidden = true;
+        }
+
+        highlightId = null;
+      }
+
+      /* =========================================================
+         FORMAT PICKER
+         ========================================================= */
+      function setFormat(format, moveFocus) {
+        var target = formatButtons.filter(function (b) { return b.dataset.format === format; })[0];
+
+        /* disabled (or unknown) formats can never become active */
+        if (!target || target.disabled) return;
+
+        activeFormat = format;
+
+        formatButtons.forEach(function (b) {
+          var on = b.dataset.format === format;
+          b.setAttribute('aria-checked', String(on));
+          b.tabIndex = on ? 0 : -1;
+          if (on && moveFocus) b.focus();
+        });
+
+        var isText = format === 'text';
+        textField.hidden = !isText;
+        fileField.hidden = isText;
+
+        if (!isText) {
+          fFile.setAttribute('accept', FORMATS[format].accept || '');
+        }
+
+        resetFile();
+        clearUploadError();
+        upStatus.textContent = '';
+      }
+
+      formatButtons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (b.disabled) return;
+          setFormat(b.dataset.format);
+        });
+      });
+
+      formatsBox.addEventListener('keydown', function (e) {
+        var keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'];
+        if (keys.indexOf(e.key) === -1) return;
+
+        /* only enabled formats take part in arrow-key navigation */
+        var enabled = formatButtons.filter(function (b) { return !b.disabled; });
+        var idx = enabled.indexOf(document.activeElement);
+        if (idx === -1) return;
+
+        e.preventDefault();
+        var dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+        var next = (idx + dir + enabled.length) % enabled.length;
+        setFormat(enabled[next].dataset.format, true);
+      });
+
+      /* =========================================================
+         FILE PICKER + DRAG AND DROP
+         ========================================================= */
+      function resetFile() {
+        pendingFile = null;
+        fFile.value = '';
+        drop.classList.remove('has-file', 'is-drag');
+        dropTitle.textContent = 'Choose a file or drop it here';
+        dropHint.textContent = FORMATS[activeFormat].hint;
+      }
+
+      function acceptFile(file) {
+        clearUploadError();
+
+        if (!file) return;
+
+        if (!fileMatchesFormat(file, activeFormat)) {
+          showUploadError('That file type doesn\u2019t match \u201C' + FORMATS[activeFormat].label + '\u201D. Choose a different format or another file.');
+          return;
+        }
+
+        if (file.size > MAX_BYTES) {
+          showUploadError('That file is ' + formatBytes(file.size) + '. The limit is 5 MB.');
+          return;
+        }
+
+        pendingFile = file;
+        drop.classList.add('has-file');
+        dropTitle.textContent = file.name;
+        dropHint.textContent = formatBytes(file.size) + ' \u00B7 ready to upload';
+
+        if (!fTitle.value.trim()) fTitle.value = baseName(file.name);
+      }
+
+      drop.addEventListener('click', function () { fFile.click(); });
+
+      drop.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          fFile.click();
+        }
+      });
+
+      fFile.addEventListener('change', function () {
+        if (fFile.files && fFile.files[0]) acceptFile(fFile.files[0]);
+      });
+
+      ['dragenter', 'dragover'].forEach(function (type) {
+        drop.addEventListener(type, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          drop.classList.add('is-drag');
+        });
+      });
+
+      ['dragleave', 'dragend'].forEach(function (type) {
+        drop.addEventListener(type, function (e) {
+          e.preventDefault();
+          drop.classList.remove('is-drag');
+        });
+      });
+
+      drop.addEventListener('drop', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        drop.classList.remove('is-drag');
+        var files = e.dataTransfer && e.dataTransfer.files;
+        if (files && files[0]) acceptFile(files[0]);
+      });
+
+      /* stop the browser opening a dropped file elsewhere on the page */
+      ['dragover', 'drop'].forEach(function (type) {
+        window.addEventListener(type, function (e) {
+          if (!drop.contains(e.target)) e.preventDefault();
+        });
+      });
+
+      /* =========================================================
+         UPLOAD ERRORS + STATUS
+         ========================================================= */
+      function showUploadError(message) {
+        upErr.textContent = message;
+        upErr.hidden = false;
+      }
+
+      function clearUploadError() {
+        upErr.hidden = true;
+        upErr.textContent = '';
+      }
+
+      /* =========================================================
+         SUBMIT
+         ========================================================= */
+      function resetForm() {
+        form.reset();
+        resetFile();
+        setFormat(activeFormat);
+        fTitle.focus();
+      }
+
+      function saveMaterial(material) {
+        materials.push(material);
+
+        if (!writeJSON(MAT_KEY, materials)) {
+          materials.pop();
+          showUploadError('Storage is full, so that material wasn\u2019t saved. Remove a material and try again.');
+          return false;
+        }
+
+        return true;
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        clearUploadError();
+        upStatus.textContent = '';
+
+        if (!activeCourseId) {
+          showUploadError('Add a course before uploading material.');
+          return;
+        }
+
+        var title = fTitle.value.trim().replace(/\s+/g, ' ');
+        if (title.length < 2) {
+          showUploadError('Give the material a title of at least 2 characters.');
+          fTitle.focus();
+          return;
+        }
+
+        /* ---- text ---- */
+        if (activeFormat === 'text') {
+          var content = fText.value.trim();
+          if (!content) {
+            showUploadError('Add some text before uploading.');
+            fText.focus();
+            return;
+          }
+
+          var textMaterial = {
+            id: uid('mat_'),
+            courseId: activeCourseId,
+            format: 'text',
+            title: title,
+            text: content,
+            createdAt: Date.now()
+          };
+
+          if (saveMaterial(textMaterial)) {
+            highlightId = textMaterial.id;
+            renderMaterials();
+            resetForm();
+            upStatus.textContent = '\u201C' + title + '\u201D added.';
+          }
+          return;
+        }
+
+        /* ---- file formats (kept for when the buttons are re-enabled) ---- */
+        if (!pendingFile) {
+          showUploadError('Choose a ' + FORMATS[activeFormat].label + ' file to upload.');
+          drop.focus();
+          return;
+        }
+
+        var material = {
+          id: uid('mat_'),
+          courseId: activeCourseId,
+          format: activeFormat,
+          title: title,
+          fileName: pendingFile.name,
+          size: pendingFile.size,
+          mime: pendingFile.type || '',
+          createdAt: Date.now()
+        };
+
+        function finish(m) {
+          uploadBtn.disabled = false;
+          if (saveMaterial(m)) {
+            highlightId = m.id;
+            renderMaterials();
+            resetForm();
+            upStatus.textContent = '\u201C' + m.title + '\u201D added.';
+          }
+        }
+
+        /* keep a small preview for images so View shows something real */
+        if (activeFormat === 'image' && pendingFile.size <= PREVIEW_MAX) {
+          uploadBtn.disabled = true;
+          readAsDataURL(pendingFile, function (url) {
+            if (url) material.dataUrl = url;
+            finish(material);
+          });
+        } else {
+          finish(material);
+        }
+      });
+
+      fTitle.addEventListener('input', function () {
+        if (!upErr.hidden) clearUploadError();
+      });
+
+      fText.addEventListener('input', function () {
+        if (!upErr.hidden) clearUploadError();
+      });
+
+      /* =========================================================
+         VIEW DIALOG
+         ========================================================= */
+      function openView(id) {
+        var m = materials.filter(function (x) { return x.id === id; })[0];
+        if (!m) return;
+
+        viewingId = id;
+        viewTitle.textContent = m.title;
+        viewMeta.textContent = metaLine(m);
+        viewBody.textContent = '';
+
+        if (m.format === 'text') {
+          var pre = document.createElement('div');
+          pre.className = 'preview-text';
+          pre.textContent = m.text || '';
+          viewBody.appendChild(pre);
+        } else if (m.format === 'image' && m.dataUrl) {
+          var img = document.createElement('img');
+          img.className = 'preview-img';
+          img.alt = m.title;
+          img.src = m.dataUrl;
+          viewBody.appendChild(img);
+        } else {
+          var note = document.createElement('p');
+          note.className = 'preview-note';
+          note.textContent = m.fileName
+            ? m.fileName + ' is attached to this course. In-app preview for ' +
+            FORMATS[m.format].label + ' files opens once a backend is connected.'
+            : 'No preview available for this material.';
+          viewBody.appendChild(note);
+        }
+
+        if (typeof viewDialog.showModal === 'function') {
+          viewDialog.showModal();
+        } else {
+          viewDialog.setAttribute('open', '');
+        }
+      }
+
+      function closeView() {
+        if (typeof viewDialog.close === 'function' && viewDialog.open) {
+          viewDialog.close();
+        } else {
+          viewDialog.removeAttribute('open');
+        }
+        viewingId = null;
+      }
+
+      document.getElementById('viewClose').addEventListener('click', closeView);
+      document.getElementById('viewDone').addEventListener('click', closeView);
+
+      viewDialog.addEventListener('click', function (e) {
+        var r = viewDialog.getBoundingClientRect();
+        var outside = e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        if (outside) closeView();
+      });
+
+      // viewRemove.addEventListener('click', function () {
+      //   if (!viewingId) return;
+
+      //   var m = materials.filter(function (x) { return x.id === viewingId; })[0];
+      //   if (!m) return;
+
+      //   if (!window.confirm('Remove \u201C' + m.title + '\u201D from this course?')) return;
+
+      //   var next = materials.filter(function (x) { return x.id !== viewingId; });
+      //   if (!writeJSON(MAT_KEY, next)) {
+      //     window.alert('Couldn\u2019t update storage. Try again.');
+      //     return;
+      //   }
+
+      //   materials = next;
+      //   closeView();
+      //   renderMaterials();
+      //   upStatus.textContent = '\u201C' + m.title + '\u201D removed.';
+      // });
+
+      /* =========================================================
+         MOBILE MENU
+         ========================================================= */
+      var menuBtn = document.getElementById('menuBtn');
+      var navList = document.getElementById('navList');
+
+      function setMenu(open) {
+        navList.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open);
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setMenu(!navList.classList.contains('open'));
+      });
+
+      navList.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!navList.contains(e.target) && e.target !== menuBtn) setMenu(false);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      if (window.matchMedia) {
+        var mq = window.matchMedia('(min-width: 860px)');
+        var onMq = function (e) { if (e.matches) setMenu(false); };
+        if (mq.addEventListener) mq.addEventListener('change', onMq);
+        else if (mq.addListener) mq.addListener(onMq);
+      }
+
+      /* =========================================================
+         HEADER SHADOW ON SCROLL
+         ========================================================= */
+      var header = document.getElementById('mainHeader');
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      /* =========================================================
+         SCROLL REVEAL
+         ========================================================= */
+      var items = document.querySelectorAll('.fade-in');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        items.forEach(function (el, i) {
+          el.style.transitionDelay = (i % 4) * 70 + 'ms';
+          io.observe(el);
+        });
+      } else {
+        items.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* =========================================================
+         BOOT
+         ========================================================= */
+      buildToggle();
+      renderMaterials();
+      setFormat('text');
+    })();
+  </script>
+</body>
+
+</html>

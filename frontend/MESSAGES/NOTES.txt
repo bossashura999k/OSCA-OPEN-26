@@ -41,9 +41,9 @@ GET courses/materials/:id
 POST /courses/ask — ask a question, get an answer
 
 body : {
-	question: "What is ….?"
-	material : material_id,
-	course : course_id
+	question: "What is ….?", // String
+	material_id : material_id,
+	course_id : course_id
 }
 
 
@@ -59,4 +59,44 @@ body : {
 
 
  
+
+The courses will use  [ { id, name, materials: [] , description }]
+
+and Material should have ids
+ [ {
+id,
+content
+}]
+
+
+I am studying maths,
+I uploaded 20 materials for maths.
+I want to ask a question on the 4th material I uploaded.
+
+How will the request look like?
+
+
+
+material = [
+{
+ id : "94248239",
+ title : "Quick notes on osmosis",
+ content : "the notes",
+ created : 'date",
+ size : "5mb,40 words
+ type:txt
+}
+]
+
+
+
+Disable the PDF, Word doc and Image buttons.
+
+The Notes input field should show on text , the file select should hide on text.
+
+ 
+The Notes input field should hide on  PDF, Word doc and Image , the file select should show on  PDF, Word doc and Image.
+
+
+
 

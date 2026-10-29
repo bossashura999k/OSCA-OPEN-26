@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script>document.documentElement.className = "js"</script>
+
+  <title>Ask your material | Ashura Study</title>
+  <meta name="description"
+    content="Pick a course, pick a material, then ask Ashura anything about it. Answers stay grounded in what you uploaded.">
+  <meta name="robots" content="index, follow">
+
+  <meta name="theme-color" content="#0d5c3a" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1a13" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       DESIGN TOKENS
+       Every colour, size, space, radius and shadow lives here.
+       (CSS variables can't be used inside @media conditions,
+        so the two breakpoints are noted as comments instead:
+        --bp-nav: 860px   --bp-sm: 600px)
+       ========================================================= */
+    :root {
+      /* colour */
+      --ink: #10221a;
+      --muted: #52645a;
+      --paper: #fbfaf5;
+      --sheet: #ffffff;
+      --line: #dfe5df;
+      --green: #0d5c3a;
+      --green-d: #08402a;
+      --pencil: #f4c430;
+      --ok: #0d7a44;
+      --bad: #b3261e;
+
+      /* buttons + final banner */
+      --btn: #0d5c3a;
+      --btn-hover: #08402a;
+      --on-btn: #ffffff;
+      --on-pencil: #10221a;
+      --pencil-hover: #ffd75a;
+
+      /* tinted states */
+      --ok-tint: rgba(13, 122, 68, .1);
+      --bad-tint: rgba(179, 38, 30, .08);
+      --header-bg: color-mix(in srgb, var(--paper) 94%, transparent);
+
+      /* typography (fluid) */
+      --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fs-base: clamp(1rem, .96rem + .2vw, 1.0625rem);
+      --fs-sm: .9rem;
+      --fs-xs: .85rem;
+      --fs-lead: clamp(1.05rem, 1rem + .3vw, 1.2rem);
+      --fs-h1: clamp(2rem, 1.25rem + 3.6vw, 3.6rem);
+      --fs-h2: clamp(1.5rem, 1.15rem + 1.8vw, 2.2rem);
+      --fs-h3: clamp(1.05rem, 1rem + .25vw, 1.15rem);
+      --lh-body: 1.6;
+      --lh-tight: 1.1;
+
+      /* spacing scale */
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4.5rem;
+      --section-y: clamp(3rem, 2rem + 4vw, 4.5rem);
+      --gutter: clamp(1rem, .6rem + 2vw, 1.5rem);
+
+      /* layout */
+      --container: 1080px;
+      --header-h: 3.5rem;
+      --logo-size: 2.5rem;
+      --tap: 2.75rem;
+      --measure: 46ch;
+
+      /* shape */
+      --radius-sm: .5rem;
+      --radius-md: .75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.25rem;
+      --radius-pill: 999px;
+
+      /* depth + motion */
+      --shadow-card: 0 18px 40px -24px rgba(8, 64, 42, .45);
+      --shadow-header: 0 6px 20px -12px rgba(8, 64, 42, .5);
+      --shadow-menu: 0 14px 24px -14px rgba(8, 64, 42, .4);
+      --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --ease: .15s ease;
+      --ease-slow: .5s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #eef3ee;
+        --muted: #a3b3a9;
+        --paper: #0d1a13;
+        --sheet: #14261c;
+        --line: #26402f;
+        --green: #2fa36b;
+        --green-d: #53c78e;
+        --btn: #1f8a58;
+        --btn-hover: #2fa36b;
+        --ok: #3fbf83;
+        --bad: #ff8a80;
+        --ok-tint: rgba(63, 191, 131, .14);
+        --bad-tint: rgba(255, 138, 128, .12);
+        --shadow-card: 0 18px 40px -24px rgba(0, 0, 0, .8);
+        --shadow-header: 0 6px 20px -12px rgba(0, 0, 0, .8);
+        --shadow-menu: 0 14px 24px -14px rgba(0, 0, 0, .8);
+        --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      :root {
+        --container: 1160px;
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    @media (min-width: 860px) {
+      :root {
+        --header-h: 4rem;
+        --logo-size: 2.75rem;
+      }
+    }
+
+    /* =========================================================
+       BASE
+       ========================================================= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + var(--space-2));
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: var(--lh-body);
+      font-size: var(--fs-base);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 3px;
+    }
+
+    .btn,
+    .chip,
+    .menu-btn {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
+    }
+
+    /* =========================================================
+       HEADER + NAV
+       ========================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding-top: env(safe-area-inset-top, 0px);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      background: var(--header-bg);
+      transition: box-shadow var(--ease);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-header);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-h);
+      gap: var(--space-4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      min-height: var(--tap);
+    }
+
+    .logo .mark {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: var(--logo-size);
+      height: var(--logo-size);
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--on-btn);
+    }
+
+    .logo .mark svg {
+      width: 58%;
+      height: 58%;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--tap);
+      height: var(--tap);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-btn svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    .menu-btn path {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform var(--ease), opacity var(--ease);
+    }
+
+    .menu-btn[aria-expanded="true"] .l1 {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    .menu-btn[aria-expanded="true"] .l2 {
+      opacity: 0;
+    }
+
+    .menu-btn[aria-expanded="true"] .l3 {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      list-style: none;
+      padding: var(--space-2) max(var(--gutter), env(safe-area-inset-right, 0px)) var(--space-4) max(var(--gutter), env(safe-area-inset-left, 0px));
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-menu);
+      max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px));
+      overflow-y: auto;
+    }
+
+    nav ul.open {
+      display: flex;
+    }
+
+    nav ul a {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+      padding: var(--space-2) var(--space-1);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    nav ul a[aria-current="page"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav ul li:last-child {
+      margin-top: var(--space-2);
+    }
+
+    nav ul li:last-child .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap);
+      padding: .65rem 1.5rem;
+      background: var(--btn);
+      color: var(--on-btn);
+      font: 600 1rem/1.2 var(--font);
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid var(--btn);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--ease), border-color var(--ease), opacity var(--ease);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .btn[disabled] {
+      opacity: .5;
+      cursor: default;
+    }
+
+    /* =========================================================
+       PAGE HEAD
+       ========================================================= */
+    .page-head {
+      padding-block: var(--space-6) var(--space-5);
+    }
+
+    h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-tight);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: var(--fs-lead);
+      margin-top: var(--space-4);
+      max-width: var(--measure);
+    }
+
+    /* =========================================================
+       STAGE
+       ========================================================= */
+    .stage {
+      max-width: 46rem;
+      margin-inline: auto;
+      padding-bottom: var(--section-y);
+    }
+
+    /* =========================================================
+       PICKERS (Comboboxes)
+       ========================================================= */
+    .picker {
+      display: grid;
+      gap: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+
+    .step-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-label .num {
+      display: grid;
+      place-items: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--ok-tint);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .combobox {
+      position: relative;
+      width: 100%;
+    }
+
+    .combobox-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--sheet);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      transition: border-color var(--ease);
+    }
+
+    .combobox-input-wrap:focus-within {
+      border-color: var(--green);
+    }
+
+    .combobox-input-wrap .search-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--muted);
+      flex: none;
+    }
+
+    .combobox-input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      font: inherit;
+      font-size: 1.05rem;
+      color: var(--ink);
+      outline: none;
+      padding: 0;
+    }
+
+    .combobox-input::placeholder {
+      color: var(--muted);
+      opacity: 0.8;
+    }
+
+    .combobox-input:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .combobox-list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow-dropdown);
+      max-height: 280px;
+      overflow-y: auto;
+      z-index: 50;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      
+      /* Animation */
+      opacity: 0;
+      transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .combobox-list.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .combobox-list::-webkit-scrollbar {
+      width: 8px;
+    }
+    .combobox-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .combobox-list::-webkit-scrollbar-thumb {
+      background: var(--line);
+      border-radius: 4px;
+    }
+    .combobox-list::-webkit-scrollbar-thumb:hover {
+      background: var(--muted);
+    }
+
+    .combobox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      width: 100%;
+      background: transparent;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      font-family: inherit;
+      text-align: left;
+      transition: background 0.1s ease;
+    }
+
+    .combobox-item:last-child {
+      border-bottom: none;
+    }
+
+    .combobox-item:hover, .combobox-item.highlighted {
+      background: var(--ok-tint);
+    }
+
+    .combobox-item[aria-selected="true"] {
+      background: var(--ok-tint);
+    }
+
+    .combobox-item .book-icon {
+      flex: none;
+    }
+
+    .combobox-item .item-text {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .combobox-item .item-primary {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .combobox-item .item-secondary {
+      color: var(--muted);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* =========================================================
+       CHAT CARD
+       ========================================================= */
+    .chat {
+      background: var(--sheet);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .chat-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-4) var(--space-3);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .doc {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex: 1;
+      min-width: 0;
+      padding: var(--space-2) var(--space-3);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      color: var(--muted);
+    }
+
+    .doc .ico {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--radius-sm);
+      background: var(--ok-tint);
+      color: var(--ok);
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .doc .name {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .doc .tag {
+      margin-left: auto;
+      flex: none;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--ok);
+    }
+
+    .doc.is-empty .name {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .doc.is-empty .tag {
+      color: var(--muted);
+    }
+
+    .chat-log {
+      padding: var(--space-4);
+      min-height: 16rem;
+      max-height: 58vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+
+    .msg {
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-3);
+      font-size: .95rem;
+      line-height: 1.5;
+      max-width: 96%;
+      overflow-wrap: anywhere;
+    }
+
+    .msg:last-child {
+      margin-bottom: 0;
+    }
+
+    .msg.user {
+      margin-left: auto;
+      border-bottom-right-radius: var(--space-1);
+      background: var(--btn);
+      color: var(--on-btn);
+      font-weight: 600;
+      white-space: pre-wrap;
+    }
+
+    .msg.ai {
+      border-bottom-left-radius: var(--space-1);
+      background: var(--ok-tint);
+      color: var(--ink);
+      transition: opacity var(--ease);
+    }
+
+    .msg.ai.thinking {
+      opacity: .65;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .msg.ai p + p,
+    .msg.ai p + ul {
+      margin-top: var(--space-2);
+    }
+
+    .msg.ai .cite {
+      font-size: var(--fs-xs);
+      color: var(--muted);
+      font-style: normal;
+      border-left: 3px solid var(--pencil);
+      padding-left: var(--space-2);
+    }
+
+    .msg.ai ul.mini {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: var(--fs-sm);
+    }
+
+    .msg.ai ul.mini li {
+      margin-bottom: var(--space-1);
+    }
+
+    .msg.ai strong {
+      font-weight: 800;
+    }
+
+    /* suggestion chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: 0 var(--space-4) var(--space-4);
+    }
+
+    .chips[hidden] {
+      display: none;
+    }
+
+    .chip {
+      min-height: 2.25rem;
+      padding: .5rem .9rem;
+      font: 600 var(--fs-xs)/1.1 var(--font);
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: border-color var(--ease), color var(--ease), opacity var(--ease);
+    }
+
+    .chip:disabled {
+      opacity: .55;
+      cursor: default;
+    }
+
+    /* composer */
+    .composer {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4) var(--space-4);
+      border-top: 1px solid var(--line);
+      background: var(--sheet);
+    }
+
+    .input {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: .7rem .85rem;
+      min-height: var(--tap);
+      transition: border-color var(--ease);
+    }
+
+    .input::placeholder {
+      color: var(--muted);
+      opacity: .8;
+    }
+
+    .input:focus {
+      border-color: var(--green);
+    }
+
+    .input:focus-visible {
+      outline: 3px solid var(--pencil);
+      outline-offset: 2px;
+    }
+
+    .input[disabled] {
+      opacity: .6;
+      cursor: default;
+    }
+
+    .composer .btn {
+      flex: none;
+      padding-inline: 1.1rem;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: var(--space-7) 0 calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .fcols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+    }
+
+    .fcols h3 {
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .fcols ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .fcols li {
+      margin-bottom: var(--space-1);
+    }
+
+    .fcols a {
+      display: inline-block;
+      padding-block: .2rem;
+      text-decoration: none;
+    }
+
+    .fbrand p {
+      max-width: 34ch;
+      margin-top: var(--space-2);
+    }
+
+    .fbottom {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+      font-size: var(--fs-xs);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+       ========================================================= */
+    .js .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--ease-slow), transform var(--ease-slow);
+    }
+
+    .js .fade-in.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =========================================================
+       HOVER
+       ========================================================= */
+    @media (hover: hover) {
+      .btn:hover:not([disabled]) {
+        background: var(--btn-hover);
+        border-color: var(--btn-hover);
+      }
+
+      .btn.ghost:hover:not([disabled]) {
+        background: transparent;
+        border-color: var(--ink);
+      }
+
+      .chip:hover:not(:disabled) {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      nav ul a:hover {
+        color: var(--ink);
+      }
+
+      .fcols a:hover {
+        color: var(--green);
+        text-decoration: underline;
+      }
+    }
+
+    /* =========================================================
+       ≥ 600px
+       ========================================================= */
+    @media (min-width: 600px) {
+      .fcols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fbrand {
+        grid-column: 1 / -1;
+      }
+
+      .fbottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+
+    /* =========================================================
+       ≥ 860px
+       ========================================================= */
+    @media (min-width: 860px) {
+      .menu-btn {
+        display: none;
+      }
+
+      nav ul {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-5);
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        max-height: none;
+        overflow: visible;
+      }
+
+      nav ul a {
+        min-height: 0;
+        padding: 0;
+        font-size: .95rem;
+      }
+
+      nav ul li:last-child {
+        margin-top: 0;
+      }
+
+      nav ul li:last-child .btn {
+        width: auto;
+        min-height: 2.5rem;
+        padding: var(--space-2) var(--space-4);
+      }
+
+      .page-head {
+        padding-block: var(--space-8) var(--space-6);
+      }
+
+      .chat-log {
+        max-height: 30rem;
+      }
+
+      .fcols {
+        grid-template-columns: 1.6fr 1fr 1fr 1fr;
+        gap: var(--space-6);
+      }
+
+      .fbrand {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-height: 480px) and (orientation: landscape) {
+      :root {
+        --header-h: 3rem;
+        --logo-size: 2rem;
+      }
+
+      .page-head {
+        padding-block: var(--space-5) var(--space-4);
+      }
+
+      .chat-log {
+        max-height: 40vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .js .fade-in {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <header id="mainHeader">
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a class="logo" href="courses.html">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 3l2.2 5.4L19.6 10.6l-5.4 2.2L12 18.2l-2.2-5.4L4.4 10.6l5.4-2.2z" />
+            </svg>
+          </span>
+          Ashura Study
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            aria-hidden="true">
+            <path class="l1" d="M4 7h16" />
+            <path class="l2" d="M4 12h16" />
+            <path class="l3" d="M4 17h16" />
+          </svg>
+        </button>
+        <ul id="navList">
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="materials.html">Materials</a></li>
+          <li><a href="#top" aria-current="page">Ask</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="materials.html">Upload material</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap page-head">
+      <h1 class="fade-in">Ask your material</h1>
+      <p class="lead fade-in">Pick a course, pick a material, then ask anything about it. Every answer comes from that
+        material and points back to it.</p>
+    </div>
+
+    <div class="wrap stage">
+      <div class="picker">
+        <div class="combobox-wrap">
+          <p class="step-label"><span class="num" aria-hidden="true">1</span> Course</p>
+          <div class="combobox" id="courseCombobox">
+            <div class="combobox-input-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" class="combobox-input" placeholder="Search courses..." autocomplete="off" aria-expanded="false" aria-controls="courseList">
+            </div>
+            <ul class="combobox-list" id="courseList" role="listbox"></ul>
+          </div>
+        </div>
+
+        <div class="combobox-wrap">
+          <p class="step-label"><span class="num" aria-hidden="true">2</span> Material</p>
+          <div class="combobox" id="materialCombobox">
+            <div class="combobox-input-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" class="combobox-input" placeholder="Search materials..." autocomplete="off" aria-expanded="false" aria-controls="materialList">
+            </div>
+            <ul class="combobox-list" id="materialList" role="listbox"></ul>
+          </div>
+        </div>
+      </div>
+
+      <section class="chat" aria-labelledby="chatHeading">
+        <h2 class="visually-hidden" id="chatHeading">Chat with Ashura about your material</h2>
+
+        <div class="chat-head">
+          <div class="doc is-empty" id="docChip">
+            <span class="ico" id="docIco" aria-hidden="true">—</span>
+            <span class="name" id="docName">No material selected</span>
+            <span class="tag" id="docTag">—</span>
+          </div>
+        </div>
+
+        <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+        <div class="chips" id="chips" hidden>
+          <button class="chip" type="button" data-q="Summarise this material">Summarise this</button>
+          <button class="chip" type="button" data-q="Make 5 flashcards from this material">Make 5 flashcards</button>
+          <button class="chip" type="button" data-q="Quiz me on this material">Quiz me</button>
+        </div>
+
+        <form class="composer" id="composer">
+          <label class="visually-hidden" for="qInput">Your question about this material</label>
+          <input class="input" id="qInput" type="text" maxlength="300" autocomplete="off" enterkeyhint="send"
+            placeholder="Ask a question about this material…" disabled>
+          <button class="btn" type="submit" id="sendBtn" disabled>Ask</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="fcols">
+        <div class="fbrand">
+          <h3>Ashura Study</h3>
+          <p>An AI study assistant that answers questions about the material you upload.</p>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="materials.html">Materials</a></li>
+            <li><a href="#top">Ask</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help centre</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of service</a></li>
+          </ul>
+        </div>
+        <div id="contact">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">Telegram channel</a></li>
+            <li><a href="#">Email us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>&copy; <span id="yr">2026</span> Ashura Study</span>
+        <span>AI can make mistakes — always check the source it cites.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================
+         STORAGE
+         ========================================================= */
+      var COURSES_KEY = 'ashura.courses.v1';
+      var MAT_KEY = 'ashura.materials.v1';
+
+      var SEED_COURSES = [
+        { id: 'crs_3f9a1b', name: 'Cell Biology', slug: 'cell-biology', description: 'Membranes, organelles, transport and cell division.' },
+        { id: 'crs_7c2e04', name: 'Organic Chemistry', slug: 'organic-chemistry', description: 'Nomenclature, reaction mechanisms and functional groups.' },
+        { id: 'crs_b81d55', name: 'Microeconomics', slug: 'microeconomics', description: 'Demand and supply, elasticity and market structures.' }
+      ];
+
+      var DAY = 86400000;
+      var NOW = Date.now();
+
+      var SEED_MATERIALS = [
+        {
+          id: 'mat_4d5e6f', courseId: 'crs_3f9a1b', format: 'text',
+          title: 'Quick notes on osmosis',
+          text: 'Osmosis is the movement of water across a partially permeable membrane, from a region of higher water potential to a region of lower water potential.\n\nWater potential is measured in kPa. Pure water has a water potential of 0 kPa. Adding solute lowers the water potential, making it negative.\n\nKey exam point: osmosis is passive, which means no ATP is used.\n\nDiffusion differs from osmosis because diffusion moves any particle down its concentration gradient, while osmosis only moves water.',
+          createdAt: NOW - 2 * DAY
+        },
+        {
+          id: 'mat_1a2b3c', courseId: 'crs_3f9a1b', format: 'pdf',
+          title: 'Lecture 1 — Membrane structure',
+          fileName: 'BIO201-L1.pdf', size: 1240000, createdAt: NOW - 3 * DAY
+        },
+        {
+          id: 'mat_7g8h9i', courseId: 'crs_7c2e04', format: 'doc',
+          title: 'Reaction mechanism summary',
+          fileName: 'mechanisms.docx', size: 320000, createdAt: NOW - DAY
+        },
+        {
+          id: 'mat_0j1k2l', courseId: 'crs_b81d55', format: 'image',
+          title: 'Elasticity diagram from the board',
+          fileName: 'elasticity-board.jpg', size: 890000, createdAt: NOW - 6 * 3600000
+        }
+      ];
+
+      function readJSON(key) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw === null ? null : JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function writeJSON(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      var courses = readJSON(COURSES_KEY);
+      if (!Array.isArray(courses)) {
+        courses = SEED_COURSES.slice();
+        writeJSON(COURSES_KEY, courses);
+      }
+
+      var materials = readJSON(MAT_KEY);
+      if (!Array.isArray(materials)) {
+        materials = SEED_MATERIALS.slice();
+        writeJSON(MAT_KEY, materials);
+      }
+
+      /* =========================================================
+         FORMAT LABELS
+         ========================================================= */
+      var BADGE = { text: 'TXT', pdf: 'PDF', doc: 'DOC', image: 'IMG' };
+      var FORMAT_LABEL = { text: 'text note', pdf: 'PDF', doc: 'Word document', image: 'image' };
+
+      /* =========================================================
+         DOM
+         ========================================================= */
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      var courseCombobox = document.getElementById('courseCombobox');
+      var courseInput = courseCombobox.querySelector('.combobox-input');
+      var courseList = courseCombobox.querySelector('.combobox-list');
+
+      var matCombobox = document.getElementById('materialCombobox');
+      var matInput = matCombobox.querySelector('.combobox-input');
+      var matList = matCombobox.querySelector('.combobox-list');
+
+      var docChip = document.getElementById('docChip');
+      var docIco = document.getElementById('docIco');
+      var docName = document.getElementById('docName');
+      var docTag = document.getElementById('docTag');
+
+      var log = document.getElementById('chatLog');
+      var chips = document.getElementById('chips');
+      var composer = document.getElementById('composer');
+      var input = document.getElementById('qInput');
+      var sendBtn = document.getElementById('sendBtn');
+
+      /* =========================================================
+         STATE
+         ========================================================= */
+      var activeCourseId = courses.length ? courses[0].id : null;
+      var activeMaterialId = null;
+      var pendingQuiz = null;
+      var busy = false;
+
+      /* =========================================================
+         TEXT HELPERS
+         ========================================================= */
+      var STOP = {};
+      'a an the is are was were be been being of in on to for and or it this that what how why when which who do does ' +
+        'did can could should would you me my i we our your about with from at by as if so then than into over under ' +
+        'there their they he she not no but also just some any more most such very'.split(' ')
+        .forEach(function (w) { STOP[w] = 1; });
+
+      function esc(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function escapeReg(value) {
+        return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      function tokensOf(value) {
+        return String(value || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, ' ')
+          .split(/\s+/)
+          .filter(function (w) { return w.length > 2 && !STOP[w]; });
+      }
+
+      function sentencesOf(value) {
+        var text = String(value || '').replace(/\s+/g, ' ').trim();
+        if (!text) return [];
+
+        var out = [];
+        var current = '';
+
+        for (var i = 0; i < text.length; i++) {
+          current += text.charAt(i);
+          var isEnd = /[.!?]/.test(text.charAt(i));
+          var atBreak = (i + 1 >= text.length) || text.charAt(i + 1) === ' ';
+          if (isEnd && atBreak) {
+            out.push(current.trim());
+            current = '';
+          }
+        }
+
+        if (current.trim()) out.push(current.trim());
+
+        return out.filter(function (s) { return s.length > 2; });
+      }
+
+      function normalize(value) {
+        return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      }
+
+      /* =========================================================
+         DATA ACCESS
+         ========================================================= */
+      function currentCourse() {
+        return courses.filter(function (c) { return c.id === activeCourseId; })[0] || null;
+      }
+
+      function currentMaterial() {
+        return materials.filter(function (m) { return m.id === activeMaterialId; })[0] || null;
+      }
+
+      function courseMaterials(courseId) {
+        return materials
+          .filter(function (m) { return m.courseId === courseId; })
+          .sort(function (a, b) { return b.createdAt - a.createdAt; });
+      }
+
+      /* =========================================================
+         COMBOBOX LOGIC
+         ========================================================= */
+      function toggleList(combobox, open) {
+        var list = combobox.querySelector('.combobox-list');
+        var input = combobox.querySelector('.combobox-input');
+        if (open) {
+          list.classList.add('open');
+          input.setAttribute('aria-expanded', 'true');
+        } else {
+          list.classList.remove('open');
+          input.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      function closeAllLists() {
+        toggleList(courseCombobox, false);
+        toggleList(matCombobox, false);
+      }
+
+      document.addEventListener('click', function(e) {
+        if (!courseCombobox.contains(e.target)) toggleList(courseCombobox, false);
+        if (!matCombobox.contains(e.target)) toggleList(matCombobox, false);
+      });
+
+      courseInput.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleList(courseCombobox, true);
+        toggleList(matCombobox, false);
+        renderCourseList(); 
+      });
+
+      courseInput.addEventListener('input', function() {
+        renderCourseList(courseInput.value);
+      });
+
+      courseInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var first = courseList.querySelector('.combobox-item[data-id]');
+          if (first) first.click();
+        }
+      });
+
+      matInput.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (matInput.disabled) return;
+        toggleList(matCombobox, true);
+        toggleList(courseCombobox, false);
+        renderMaterialList();
+      });
+
+      matInput.addEventListener('input', function() {
+        renderMaterialList(matInput.value);
+      });
+
+      matInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var first = matList.querySelector('.combobox-item[data-id]');
+          if (first) first.click();
+        }
+      });
+
+      function renderCourseList(filter) {
+        courseList.innerHTML = '';
+        var q = (filter || '').toLowerCase();
+        
+        var filtered = courses.filter(function(c) {
+          return c.name.toLowerCase().indexOf(q) !== -1 || (c.description || '').toLowerCase().indexOf(q) !== -1;
+        });
+
+        if (!filtered.length) {
+          var empty = document.createElement('li');
+          empty.className = 'combobox-item';
+          empty.style.color = 'var(--muted)';
+          empty.style.cursor = 'default';
+          empty.textContent = 'No courses found';
+          courseList.appendChild(empty);
+          return;
+        }
+
+        filtered.forEach(function(c) {
+          var li = document.createElement('li');
+          li.className = 'combobox-item';
+          li.setAttribute('role', 'option');
+          li.setAttribute('aria-selected', c.id === activeCourseId);
+          li.dataset.id = c.id;
+          
+          li.innerHTML = `
+            <svg class="book-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="6" width="8" height="12" rx="1.5" fill="#60A5FA"/>
+              <rect x="9" y="4" width="6" height="14" rx="1.5" fill="#34D399"/>
+              <rect x="13" y="8" width="7" height="10" rx="1.5" fill="#F472B6"/>
+            </svg>
+            <div class="item-text">
+              <span class="item-primary">${esc(c.name)}</span>
+              <span class="item-secondary">${esc(c.description || '')}</span>
+            </div>
+          `;
+
+          li.addEventListener('click', function() {
+            setCourse(c.id);
+            toggleList(courseCombobox, false);
+          });
+
+          courseList.appendChild(li);
+        });
+      }
+
+      function renderMaterialList(filter) {
+        matList.innerHTML = '';
+        
+        if (!activeCourseId) {
+          matInput.disabled = true;
+          matInput.placeholder = 'Select a course first';
+          return;
+        }
+        
+        matInput.disabled = false;
+        matInput.placeholder = 'Search materials...';
+
+        var q = (filter || '').toLowerCase();
+        var list = courseMaterials(activeCourseId);
+        
+        if (!list.length) {
+          matInput.disabled = true;
+          matInput.placeholder = 'No materials in this course';
+          matInput.value = '';
+          activeMaterialId = null;
+          syncDocChip();
+          resetChat();
+          
+          var empty = document.createElement('li');
+          empty.className = 'combobox-item';
+          empty.style.color = 'var(--muted)';
+          empty.style.cursor = 'default';
+          empty.textContent = 'No materials in this course';
+          matList.appendChild(empty);
+          return;
+        }
+
+        var filtered = list.filter(function(m) {
+          return m.title.toLowerCase().indexOf(q) !== -1 || (m.fileName || '').toLowerCase().indexOf(q) !== -1;
+        });
+
+        if (!filtered.length) {
+          var empty = document.createElement('li');
+          empty.className = 'combobox-item';
+          empty.style.color = 'var(--muted)';
+          empty.style.cursor = 'default';
+          empty.textContent = 'No materials match your search';
+          matList.appendChild(empty);
+          return;
+        }
+
+        filtered.forEach(function(m) {
+          var li = document.createElement('li');
+          li.className = 'combobox-item';
+          li.setAttribute('role', 'option');
+          li.setAttribute('aria-selected', m.id === activeMaterialId);
+          li.dataset.id = m.id;
+          
+          li.innerHTML = `
+            <svg class="book-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="6" width="8" height="12" rx="1.5" fill="#60A5FA"/>
+              <rect x="9" y="4" width="6" height="14" rx="1.5" fill="#34D399"/>
+              <rect x="13" y="8" width="7" height="10" rx="1.5" fill="#F472B6"/>
+            </svg>
+            <div class="item-text">
+              <span class="item-primary">${esc(m.title)}</span>
+              <span class="item-secondary">${esc(BADGE[m.format] || 'File')} ${m.fileName ? '· ' + esc(m.fileName) : ''}</span>
+            </div>
+          `;
+
+          li.addEventListener('click', function() {
+            setMaterial(m.id);
+            toggleList(matCombobox, false);
+          });
+
+          matList.appendChild(li);
+        });
+      }
+
+      /* =========================================================
+         SELECTION HANDLERS
+         ========================================================= */
+      function setCourse(id) {
+        activeCourseId = id;
+        var course = currentCourse();
+        if (course) courseInput.value = course.name;
+        
+        activeMaterialId = null;
+        matInput.value = '';
+        
+        var list = courseMaterials(activeCourseId);
+        if (list.length) {
+          activeMaterialId = list[0].id;
+          matInput.value = list[0].title;
+        }
+        
+        renderCourseList();
+        renderMaterialList();
+        syncDocChip();
+        resetChat();
+      }
+
+      function setMaterial(id) {
+        if (activeMaterialId === id) return;
+        activeMaterialId = id;
+        var m = currentMaterial();
+        if (m) matInput.value = m.title;
+        
+        renderMaterialList();
+        syncDocChip();
+        resetChat();
+      }
+
+      function syncDocChip() {
+        var m = currentMaterial();
+
+        if (!m) {
+          docChip.classList.add('is-empty');
+          docIco.textContent = '\u2014';
+          docName.textContent = 'No material selected';
+          docTag.textContent = '\u2014';
+          input.disabled = true;
+          sendBtn.disabled = true;
+          chips.hidden = true;
+          return;
+        }
+
+        docChip.classList.remove('is-empty');
+        docIco.textContent = BADGE[m.format] || 'FILE';
+        docName.textContent = m.title;
+        docTag.textContent = 'Selected';
+
+        var hasText = !!(m.text && m.text.trim());
+        input.disabled = !hasText || busy;
+        sendBtn.disabled = !hasText || busy;
+        input.placeholder = hasText
+          ? 'Ask a question about this material\u2026'
+          : 'This material has no readable text yet';
+        chips.hidden = !hasText;
+      }
+
+      /* =========================================================
+         CHAT RENDERING
+         ========================================================= */
+      function scrollDown() {
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function addUser(text) {
+        var el = document.createElement('p');
+        el.className = 'msg user';
+        el.textContent = text;
+        log.appendChild(el);
+        return el;
+      }
+
+      function addAi(html, thinking) {
+        var el = document.createElement('div');
+        el.className = 'msg ai' + (thinking ? ' thinking' : '');
+        el.innerHTML = html;
+        log.appendChild(el);
+        return el;
+      }
+
+      function resetChat() {
+        log.textContent = '';
+        pendingQuiz = null;
+        busy = false;
+
+        var m = currentMaterial();
+
+        if (!m) {
+          addAi('<p>Pick a course and a material above, then ask anything about it.</p>');
+          scrollDown();
+          return;
+        }
+
+        var hasText = !!(m.text && m.text.trim());
+
+        if (hasText) {
+          addAi('<p>Ready. Ask anything about <strong>' + esc(m.title) + '</strong> — I&rsquo;ll answer from this ' +
+            'material and show you where it came from.</p>');
+        } else {
+          addAi('<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
+            ', and I can only read text notes right now. Full text extraction for PDFs, Word documents and images ' +
+            'opens when a backend is connected.</p>' +
+            '<p>Pick a text material in this course to try the chat.</p>');
+        }
+
+        scrollDown();
+      }
+
+      function setBusy(state) {
+        busy = state;
+
+        var m = currentMaterial();
+        var hasText = !!(m && m.text && m.text.trim());
+
+        input.disabled = state || !hasText;
+        sendBtn.disabled = state || !hasText;
+
+        Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function (c) {
+          c.disabled = state || !hasText;
+        });
+      }
+
+      /* =========================================================
+         ANSWERING
+         ========================================================= */
+      function cite(m) {
+        var extra = m.format === 'text' ? '' : ' \u00B7 ' + esc(m.fileName || '');
+        return '<p class="cite">Source: &ldquo;' + esc(m.title) + '&rdquo;' + extra + '</p>';
+      }
+
+      function boldTokens(sentenceHtml, tokens) {
+        if (!tokens.length) return sentenceHtml;
+
+        var re = new RegExp('\\b(' + tokens.slice(0, 8).map(escapeReg).join('|') + ')\\b', 'gi');
+        return sentenceHtml.replace(re, '<strong>$1</strong>');
+      }
+
+      function summaryHtml(m) {
+        var sents = sentencesOf(m.text).slice(0, 4);
+
+        if (!sents.length) return '<p>There isn&rsquo;t enough text to summarise yet.</p>' + cite(m);
+
+        return '<p><strong>Summary</strong></p><ul class="mini">' +
+          sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
+          '</ul>' + cite(m);
+      }
+
+      function flashcardHtml(m) {
+        var sents = sentencesOf(m.text).slice(0, 5);
+
+        if (!sents.length) return '<p>There isn&rsquo;t enough text to build flashcards yet.</p>' + cite(m);
+
+        return '<p><strong>' + sents.length + ' quick flashcards</strong></p><ul class="mini">' +
+          sents.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') +
+          '</ul>' + cite(m);
+      }
+
+      function quizHtml(m) {
+        var sents = sentencesOf(m.text).filter(function (s) {
+          return s.split(/\s+/).length >= 6;
+        });
+
+        if (!sents.length) {
+          return '<p>This material is a bit short for a quiz. Add a longer note and try again.</p>' + cite(m);
+        }
+
+        var sentence = sents[Math.floor(Math.random() * sents.length)];
+
+        var words = sentence
+          .replace(/[^A-Za-z0-9\s-]/g, ' ')
+          .split(/\s+/)
+          .filter(function (w) { return w.length >= 5 && !STOP[w.toLowerCase()]; });
+
+        if (!words.length) return summaryHtml(m);
+
+        var word = words.reduce(function (a, b) { return b.length > a.length ? b : a; }, words[0]);
+        var blanked = sentence.replace(new RegExp('\\b' + escapeReg(word) + '\\b'), '_____');
+
+        pendingQuiz = { word: word, sentence: sentence };
+
+        return '<p><strong>Fill in the blank</strong></p>' +
+          '<p>' + esc(blanked) + '</p>' +
+          '<p class="cite">Reply with the missing word and I&rsquo;ll check it.</p>' + cite(m);
+      }
+
+      function lookupHtml(m, question) {
+        var q = tokensOf(question);
+        var sents = sentencesOf(m.text);
+
+        if (!q.length) {
+          return '<p>Try a question with a few key words from the material — for example a term you want explained.</p>' +
+            cite(m);
+        }
+
+        var scored = sents.map(function (s, i) {
+          var low = s.toLowerCase();
+          var score = 0;
+          q.forEach(function (t) { if (low.indexOf(t) !== -1) score++; });
+          return { s: s, i: i, score: score };
+        });
+
+        var hits = scored
+          .filter(function (x) { return x.score > 0; })
+          .sort(function (a, b) { return b.score - a.score || a.i - b.i; })
+          .slice(0, 3)
+          .sort(function (a, b) { return a.i - b.i; });
+
+        if (!hits.length) {
+          var freq = {};
+          sents.forEach(function (s) {
+            tokensOf(s).forEach(function (t) { freq[t] = (freq[t] || 0) + 1; });
+          });
+
+          var keys = Object.keys(freq)
+            .sort(function (a, b) { return freq[b] - freq[a]; })
+            .slice(0, 6);
+
+          return '<p>I couldn&rsquo;t find that in &ldquo;' + esc(m.title) + '&rdquo;.</p>' +
+            (keys.length
+              ? '<p>This material covers things like ' +
+              keys.map(function (k) { return '<strong>' + esc(k) + '</strong>'; }).join(', ') +
+              '. Try one of those words, or ask me to summarise it.</p>'
+              : '<p>It&rsquo;s a short note, so try asking for a summary.</p>') +
+            cite(m);
+        }
+
+        var answer = hits.map(function (x) {
+          return boldTokens(esc(x.s), q);
+        }).join(' ');
+
+        return '<p>' + answer + '</p>' + cite(m);
+      }
+
+      function answerHtml(question) {
+        var m = currentMaterial();
+
+        if (!m) return '<p>Pick a material first.</p>';
+
+        var text = (m.text || '').trim();
+
+        if (!text) {
+          return '<p><strong>' + esc(m.title) + '</strong> is a ' + esc(FORMAT_LABEL[m.format] || 'file') +
+            ', so there is no readable text for me to quote yet.</p>' +
+            '<p>Text extraction for PDFs, Word documents and images opens once a backend is connected. ' +
+            'Pick a text material in this course to use the chat.</p>';
+        }
+
+        if (pendingQuiz) {
+          var quiz = pendingQuiz;
+          pendingQuiz = null;
+
+          if (normalize(question) === normalize(quiz.word)) {
+            return '<p><strong>Correct.</strong> The missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
+              '<p>' + esc(quiz.sentence) + '</p>' + cite(m);
+          }
+
+          return '<p>Close — the missing word was &ldquo;' + esc(quiz.word) + '&rdquo;.</p>' +
+            '<p>' + esc(quiz.sentence) + '</p>' + cite(m);
+        }
+
+        var lower = question.toLowerCase();
+
+        if (/summar/.test(lower)) return summaryHtml(m);
+        if (/flashcard|flash card/.test(lower)) return flashcardHtml(m);
+        if (/\bquiz\b|test me|ask me a question/.test(lower)) return quizHtml(m);
+
+        return lookupHtml(m, question);
+      }
+
+      /* =========================================================
+         SENDING
+         ========================================================= */
+      function ask(question) {
+        var text = String(question || '').trim();
+        if (!text || busy || !currentMaterial()) return;
+
+        addUser(text);
+        input.value = '';
+        setBusy(true);
+        scrollDown();
+
+        var thinking = addAi('Reading your material\u2026', true);
+        scrollDown();
+
+        window.setTimeout(function () {
+          if (thinking.parentNode) thinking.parentNode.removeChild(thinking);
+          addAi(answerHtml(text));
+          setBusy(false);
+          scrollDown();
+          if (!input.disabled) input.focus();
+        }, 550);
+      }
+
+      composer.addEventListener('submit', function (e) {
+        e.preventDefault();
+        ask(input.value);
+      });
+
+      chips.addEventListener('click', function (e) {
+        var chip = e.target.closest('.chip');
+        if (!chip || chip.disabled) return;
+        ask(chip.dataset.q || chip.textContent);
+      });
+
+      input.addEventListener('input', function () {
+        if (!busy) sendBtn.disabled = !input.value.trim() || input.disabled;
+      });
+
+      /* =========================================================
+         MOBILE MENU
+         ========================================================= */
+      var menuBtn = document.getElementById('menuBtn');
+      var navList = document.getElementById('navList');
+
+      function setMenu(open) {
+        navList.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open);
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setMenu(!navList.classList.contains('open'));
+      });
+
+      navList.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!navList.contains(e.target) && e.target !== menuBtn) setMenu(false);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      if (window.matchMedia) {
+        var mq = window.matchMedia('(min-width: 860px)');
+        var onMq = function (e) { if (e.matches) setMenu(false); };
+        if (mq.addEventListener) mq.addEventListener('change', onMq);
+        else if (mq.addListener) mq.addListener(onMq);
+      }
+
+      /* =========================================================
+         HEADER SHADOW ON SCROLL
+         ========================================================= */
+      var header = document.getElementById('mainHeader');
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      /* =========================================================
+         SCROLL REVEAL
+         ========================================================= */
+      var items = document.querySelectorAll('.fade-in');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        items.forEach(function (el, i) {
+          el.style.transitionDelay = (i % 4) * 70 + 'ms';
+          io.observe(el);
+        });
+      } else {
+        items.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* =========================================================
+         BOOT
+         ========================================================= */
+      if (!courses.length) {
+        courseInput.value = '';
+        courseInput.placeholder = 'No courses available';
+        courseInput.disabled = true;
+        matInput.value = '';
+        matInput.placeholder = 'Select a course first';
+        matInput.disabled = true;
+        syncDocChip();
+        resetChat();
+      } else {
+        activeCourseId = courses[0].id;
+        courseInput.value = courses[0].name;
+        
+        var initialMats = courseMaterials(activeCourseId);
+        if (initialMats.length) {
+          activeMaterialId = initialMats[0].id;
+          matInput.value = initialMats[0].title;
+        }
+        
+        renderCourseList();
+        renderMaterialList();
+        syncDocChip();
+        resetChat();
+      }
+
+      /* Select text on focus for easy overwriting */
+      courseInput.addEventListener('focus', function() { this.select(); });
+      matInput.addEventListener('focus', function() { this.select(); });
+    })();
+  </script>
+</body>
+
+</html>
