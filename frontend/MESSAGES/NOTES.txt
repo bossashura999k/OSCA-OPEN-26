@@ -1,0 +1,102 @@
+
+in cloudfare R2 bucket public /courses.json
+
+GET /courses — array of a course
+[
+  {
+	displayName : [ Mathematics, maths ],
+	id : math
+  },
+  …
+ {}
+];
+
+
+
+GET courses/materials/
+	 header : { x-api-key : API_dsjkdku4i27928 }
+
+	get the names and ids of previously uploaded materials
+
+RESPONSE :
+[
+  {
+	displayName : [ Mathematics, maths ],
+	id : math,
+	filetype : pdf||image,
+	preview : "image source url" //Like the first pages
+  },
+  …
+ {}
+];
+
+
+
+GET courses/materials/:id
+	get a practical material
+
+
+
+
+POST /courses/ask — ask a question, get an answer
+
+body : {
+	question: "What is ….?", // String
+	material_id : material_id,
+	course_id : course_id
+}
+
+
+
+
+ POST /courses (create),
+
+ POST /courses/:course_id/materials with { content: string } (text-paste only, no files/R2),
+
+ POST /courses/:id/ask with { question: string } (single course, not multi-material refs for now — simpler, faster). I’ll build to this exact shape tonight.
+
+
+
+
+ 
+
+The courses will use  [ { id, name, materials: [] , description }]
+
+and Material should have ids
+ [ {
+id,
+content
+}]
+
+
+I am studying maths,
+I uploaded 20 materials for maths.
+I want to ask a question on the 4th material I uploaded.
+
+How will the request look like?
+
+
+
+material = [
+{
+ id : "94248239",
+ title : "Quick notes on osmosis",
+ content : "the notes",
+ created : 'date",
+ size : "5mb,40 words
+ type:txt
+}
+]
+
+
+
+Disable the PDF, Word doc and Image buttons.
+
+The Notes input field should show on text , the file select should hide on text.
+
+ 
+The Notes input field should hide on  PDF, Word doc and Image , the file select should show on  PDF, Word doc and Image.
+
+
+
+
