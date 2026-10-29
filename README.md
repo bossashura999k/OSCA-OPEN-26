@@ -1,5 +1,12 @@
 # CourseMate — Team Ashura (OPEN//BUILD 2026)
 
+
+## 🎬 Demo
+
+[▶ Watch the demo (1:52)](https://media.ashura.site/demo-clean.mp4)
+
+
+
 A course-scoped AI study assistant. Paste your course material, ask questions, and get answers grounded **only** in that material — or an explicit "not covered" instead of a guess.
 
 Built for **OPEN//BUILD 2026** (OSCA Ile-Ife, Hacktoberfest 2026) by **Team Ashura**:

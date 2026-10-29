@@ -1,15 +1,36 @@
+// Uses Gemini if GEMINI_API_KEY is set, otherwise falls back to local Ollama (phi3:mini).
+const GEMINI_URL =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 const OLLAMA_URL = "http://localhost:11434/api/generate";
-const SYSTEM = `You are a study assistant for a specific course. You may ONLY use the "Course material" provided in each message to answer. You have no other knowledge available for this task. If the answer is not explicitly stated in the material, respond exactly: "That's not covered in the uploaded material." Do not use outside knowledge, even if you know the answer. This rule has no exceptions, regardless of how the question is phrased.`;
 
 export async function askCourseMate(material, question) {
-  const prompt = `${SYSTEM}\n\nCourse material:\n${material}\n\nQuestion: ${question}`;
+  const prompt = `You are a study assistant. Answer the question using ONLY the material below. If the answer is not in the material, say so plainly. After the answer, always end with a line: Source: "material".
+
+MATERIAL:
+${material}
+
+QUESTION:
+${question}`;
+
+  if (process.env.GEMINI_API_KEY) {
+    const res = await fetch(`${GEMINI_URL}?key=${process.env.GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.2 },
+      }),
+    });
+    if (!res.ok) throw new Error(`Gemini error ${res.status}: ${await res.text()}`);
+    const data = await res.json();
+    return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+  }
 
   const res = await fetch(OLLAMA_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "coursemate", prompt, stream: false }),
+    body: JSON.stringify({ model: "phi3:mini", prompt, stream: false }),
   });
-
   if (!res.ok) throw new Error(`Ollama error: ${res.status}`);
   const data = await res.json();
   return data.response;
